@@ -16,17 +16,17 @@
 
 Este tema incluye cuatro tipos de **cajas callout** para facilitar el estudio:
 
-> **[DATO CLAVE EXAMEN]** Información de alta densidad memorística, con alta probabilidad de aparecer en el test oficial.
+> **[DATO CLAVE]** Información de alta densidad memorística.
 
 > **[EJERCICIO RESUELTO]** Problema + solución paso a paso (diagnóstico de un síntoma, decisión de administración razonada).
 
-> **[EJEMPLO AYTO MADRID]** Aplicación real de la teoría al entorno municipal (sede electrónica, Padrón, puestos de distrito).
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Aplicación real de la teoría al entorno municipal (sede electrónica, Padrón, puestos de distrito).
 
-> **[REFERENCIA CRUZADA]** Enlace conceptual a otros temas del temario oficial.
+> **[RELACIÓN CON OTROS TEMAS]** Enlace conceptual a otros temas del temario oficial.
 
-**Estructura**: el esqueleto oficial agrupa la materia en cuatro bloques. Cada bloque se desarrolla aquí en **dos secciones numeradas**, de modo que el contenido tiene **8 secciones y 31 epígrafes** sin añadir ni suprimir nada del enunciado oficial:
+**Estructura**: la materia se agrupa en cuatro bloques. Cada bloque se desarrolla aquí en **dos secciones numeradas**, de modo que el contenido tiene **8 secciones y 31 epígrafes** sin añadir ni suprimir nada del enunciado oficial:
 
-| Bloque del esqueleto oficial | Secciones |
+| Bloque | Secciones |
 |---|---|
 | I — Administración del sistema operativo y software de base | §1 Fundamentos y arquitectura · §2 Gestión y control de recursos |
 | II — Funciones y responsabilidades de la administración de sistemas | §3 Funciones operativas · §4 Responsabilidades organizativas y marco normativo |
@@ -52,7 +52,7 @@ Todo el tema se apoya en esta dualidad, presente en cualquier parque municipal. 
 | Instalación de software | Gestor de paquetes (`apt`, `dnf`, `zypper`) | MSI/MSIX, `winget`, distribución centralizada |
 | Dónde vive la configuración | Ficheros de texto en `/etc` [FHS] | Registro de Windows (`HKEY_LOCAL_MACHINE`…) y ficheros |
 
-> **[DATO CLAVE EXAMEN]** En Linux **la configuración es texto en `/etc`** y los registros están en `/var/log`, según el estándar de jerarquía de archivos FHS [FHS]; en Windows, buena parte de la configuración vive en el **Registro**. Esta diferencia explica por qué en Linux la administración se automatiza tan bien con guiones de texto y control de versiones.
+> **[DATO CLAVE]** En Linux **la configuración es texto en `/etc`** y los registros están en `/var/log`, según el estándar de jerarquía de archivos FHS [FHS]; en Windows, buena parte de la configuración vive en el **Registro**. Esta diferencia explica por qué en Linux la administración se automatiza tan bien con guiones de texto y control de versiones.
 
 **Caso de referencia usado en todo el tema** (contexto Ayuntamiento de Madrid, supuesto simplificado): el **Informática del Ayuntamiento de Madrid (IAM)** explota un conjunto de servidores —unos con Windows Server y otros con Linux— que sostienen la **Sede Electrónica**, el **Padrón municipal** y el gestor de expedientes, junto a varios miles de **puestos de usuario** repartidos por Áreas de Gobierno y Distritos. Sobre ese parque se ilustran todas las tareas del tema: cuentas y permisos, servicios, ventanas de mantenimiento, parcheo, registros, diagnóstico de una caída y restauración tras un desastre.
 
@@ -85,11 +85,11 @@ Las **funciones esenciales** del sistema operativo, núcleo del software de base
 
 A ellas se añade la **interfaz**: la interfaz de programación (**llamadas al sistema**) y la interfaz de usuario (intérprete de órdenes o entorno gráfico).
 
-> **[DATO CLAVE EXAMEN]** El sistema operativo cumple simultáneamente dos papeles clásicos: **máquina extendida** (oculta la complejidad del hardware tras abstracciones cómodas: archivo, proceso, socket) y **gestor de recursos** (reparte CPU, memoria, disco y dispositivos entre programas que compiten). Tanenbaum los formula así de forma explícita [TANENBAUM].
+> **[DATO CLAVE]** El sistema operativo cumple simultáneamente dos papeles clásicos: **máquina extendida** (oculta la complejidad del hardware tras abstracciones cómodas: archivo, proceso, socket) y **gestor de recursos** (reparte CPU, memoria, disco y dispositivos entre programas que compiten). Tanenbaum los formula así de forma explícita [TANENBAUM].
 
 La separación entre **modo núcleo** (privilegiado, anillo 0, acceso total al hardware) y **modo usuario** (restringido) es el mecanismo de hardware que hace posible la protección: una aplicación **no puede** tocar el hardware directamente, sino que debe pedirlo mediante una **llamada al sistema**, que provoca un cambio controlado a modo núcleo [STALLINGS] [SILBERSCHATZ].
 
-> **[DATO CLAVE EXAMEN]** Una **llamada al sistema** (*system call*) es la única puerta legítima entre el modo usuario y el modo núcleo. Su coste no es cero: implica un cambio de modo, por lo que un programa que hace millones de llamadas pequeñas rinde peor que otro que agrupa el trabajo. `open`, `read`, `write`, `fork` y `exec` son llamadas POSIX típicas [POSIX].
+> **[DATO CLAVE]** Una **llamada al sistema** (*system call*) es la única puerta legítima entre el modo usuario y el modo núcleo. Su coste no es cero: implica un cambio de modo, por lo que un programa que hace millones de llamadas pequeñas rinde peor que otro que agrupa el trabajo. `open`, `read`, `write`, `fork` y `exec` son llamadas POSIX típicas [POSIX].
 
 Los sistemas operativos se clasifican, además, por criterios que conviene tener ordenados:
 
@@ -98,9 +98,9 @@ Los sistemas operativos se clasifican, además, por criterios que conviene tener
 - **Por finalidad**: propósito general, **de tiempo real** (garantiza plazos de respuesta: sistemas de control, señalización), embebido, distribuido o de red.
 - **Por licencia**: privativo (Windows) o libre/código abierto (Linux, familia BSD).
 
-> **[EJEMPLO AYTO MADRID]** En el parque del IAM conviven los tres perfiles: **servidores** multiusuario que sostienen la Sede Electrónica; **puestos de trabajo** de personal municipal; y sistemas **embebidos o de tiempo real** en la periferia (paneles informativos, control de accesos, semaforización). El software de base y las tareas de administración son conceptualmente los mismos, pero las ventanas de mantenimiento y la tolerancia a la caída son radicalmente distintas.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** En el parque del IAM conviven los tres perfiles: **servidores** multiusuario que sostienen la Sede Electrónica; **puestos de trabajo** de personal municipal; y sistemas **embebidos o de tiempo real** en la periferia (paneles informativos, control de accesos, semaforización). El software de base y las tareas de administración son conceptualmente los mismos, pero las ventanas de mantenimiento y la tolerancia a la caída son radicalmente distintas.
 
-> **[REFERENCIA CRUZADA]** Los **sistemas operativos** en sí mismos —características, elementos constitutivos, Windows, Unix/Linux y sistemas móviles— son objeto del **Tema 14**. Este tema los aborda desde el punto de vista del **administrador**: qué hay que hacer con ellos una vez instalados. La **arquitectura del ordenador** sobre la que se apoyan es el **Tema 11**, y los **periféricos y elementos de almacenamiento**, el **Tema 12**.
+> **[RELACIÓN CON OTROS TEMAS]** Los **sistemas operativos** en sí mismos —características, elementos constitutivos, Windows, Unix/Linux y sistemas móviles— son objeto del **Tema 14**. Este tema los aborda desde el punto de vista del **administrador**: qué hay que hacer con ellos una vez instalados. La **arquitectura del ordenador** sobre la que se apoyan es el **Tema 11**, y los **periféricos y elementos de almacenamiento**, el **Tema 12**.
 
 #### 1.1.1. Modelos de arquitectura: monolítico, micronúcleo y modular
 
@@ -130,11 +130,11 @@ La cuestión arquitectónica central es **cuánto código se ejecuta en modo nú
 | Extensibilidad en caliente | Limitada | Alta | Alta (carga de módulos) |
 | Ejemplos | Unix, Linux, BSD | MINIX 3, QNX, L4 | Linux (módulos), Windows NT, XNU |
 
-> **[DATO CLAVE EXAMEN]** Regla mnemotécnica: **monolítico = rápido pero frágil; micronúcleo = robusto pero con sobrecarga de mensajes; modular/híbrido = compromiso**. Y un matiz que se pregunta con frecuencia: **Linux es monolítico modular**, no un micronúcleo, por más que cargue y descargue módulos en caliente.
+> **[DATO CLAVE]** Regla mnemotécnica: **monolítico = rápido pero frágil; micronúcleo = robusto pero con sobrecarga de mensajes; modular/híbrido = compromiso**. Y un matiz: **Linux es monolítico modular**, no un micronúcleo, por más que cargue y descargue módulos en caliente.
 
 **Otras estructuras** que conviene reconocer: **por capas** (cada capa solo usa la inmediatamente inferior; claridad conceptual a costa de rendimiento), **máquina virtual** (un hipervisor ofrece varias copias del hardware, base de la virtualización) y **exonúcleo** (el núcleo solo reparte recursos y las bibliotecas de cada aplicación implementan las abstracciones) [TANENBAUM].
 
-> **[REFERENCIA CRUZADA]** La estructura de **máquina virtual** y el papel del hipervisor se desarrollan en el **Tema 28** (virtualización de sistemas y de puestos de usuario). Aquí interesa solo como modelo arquitectónico y, más adelante (§6.2.1 y §8.1), como herramienta de marcha atrás mediante instantáneas.
+> **[RELACIÓN CON OTROS TEMAS]** La estructura de **máquina virtual** y el papel del hipervisor se desarrollan en el **Tema 28** (virtualización de sistemas y de puestos de usuario). Aquí interesa solo como modelo arquitectónico y, más adelante (§6.2.1 y §8.1), como herramienta de marcha atrás mediante instantáneas.
 
 ### 1.2. Componentes principales del software de base
 
@@ -152,7 +152,7 @@ Instalar un sistema operativo es, en realidad, dejar en el disco una **cadena de
 | Verificación de firma | No | **Arranque Seguro** (*Secure Boot*): solo ejecuta binarios firmados por claves de confianza |
 | Interfaz | Texto, teclado | Gráfica, ratón, red, extensible |
 
-> **[DATO CLAVE EXAMEN]** **UEFI + GPT + ESP (FAT32) + Arranque Seguro** es el cuarteto que se pregunta. El **Arranque Seguro** verifica la **firma digital** de cada componente de la cadena de arranque para impedir que un *rootkit* se cargue antes que el sistema operativo; si se instala un núcleo o un controlador sin firmar, el equipo no arranca hasta que se firma o se desactiva la comprobación [UEFI-SPEC].
+> **[DATO CLAVE]** **UEFI + GPT + ESP (FAT32) + Arranque Seguro** es el cuarteto clave. El **Arranque Seguro** verifica la **firma digital** de cada componente de la cadena de arranque para impedir que un *rootkit* se cargue antes que el sistema operativo; si se instala un núcleo o un controlador sin firmar, el equipo no arranca hasta que se firma o se desactiva la comprobación [UEFI-SPEC].
 
 **2) Gestor de arranque (*boot manager*) y cargador (*boot loader*).** El gestor de arranque **presenta y elige** entre sistemas o versiones; el cargador **lee el núcleo del disco y lo pone en memoria**, le pasa parámetros y le cede el control. En la práctica ambos papeles suelen residir en el mismo producto:
 
@@ -170,11 +170,11 @@ Instalar un sistema operativo es, en realidad, dejar en el disco una **cadena de
 - **Enlace estático**: la biblioteca se copia dentro del ejecutable. Ventaja: autonomía. Inconveniente: para corregir un fallo de la biblioteca hay que **recompilar y redistribuir** todos los programas que la incluyen.
 - **Enlace dinámico**: la biblioteca se carga en memoria en tiempo de ejecución y **se comparte** entre procesos. Ventaja: se parchea una vez y todos los programas quedan corregidos; ahorro de memoria. Inconveniente: dependencia de versiones (el clásico «infierno de las DLL»).
 
-> **[DATO CLAVE EXAMEN]** El **enlace dinámico es la razón por la que parchear el sistema operativo protege a todas las aplicaciones a la vez**: si una vulnerabilidad está en una biblioteca compartida (por ejemplo, una biblioteca criptográfica), basta actualizar la biblioteca y **reiniciar los servicios que la tenían cargada**. Ese matiz —reiniciar el servicio o el sistema— es lo que a menudo se olvida: el binario nuevo está en disco, pero el proceso en memoria sigue usando el viejo.
+> **[DATO CLAVE]** El **enlace dinámico es la razón por la que parchear el sistema operativo protege a todas las aplicaciones a la vez**: si una vulnerabilidad está en una biblioteca compartida (por ejemplo, una biblioteca criptográfica), basta actualizar la biblioteca y **reiniciar los servicios que la tenían cargada**. Ese matiz —reiniciar el servicio o el sistema— es lo que a menudo se olvida: el binario nuevo está en disco, pero el proceso en memoria sigue usando el viejo.
 
 **7) Gestor de paquetes.** Es la pieza que convierte todo lo anterior en algo administrable: instala, actualiza, verifica firmas y resuelve dependencias del software de base (`apt`/`dpkg`, `dnf`/`rpm`, `winget`, MSI). Un parque sin gestión de paquetes centralizada es un parque que no se puede inventariar ni parchear con garantías (§4.1 y §6.2).
 
-> **[EJEMPLO AYTO MADRID]** Cuando en un servidor de la Sede Electrónica se actualiza la biblioteca de TLS por una vulnerabilidad grave, no basta con que el gestor de paquetes deje el archivo nuevo en disco: hay que **reiniciar el servidor web y el servidor de aplicaciones** para que dejen de usar la copia vulnerable ya cargada en memoria. La comprobación se hace listando los procesos que mantienen abiertas bibliotecas eliminadas y se documenta en el parte de la ventana de mantenimiento (§6.2).
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Cuando en un servidor de la Sede Electrónica se actualiza la biblioteca de TLS por una vulnerabilidad grave, no basta con que el gestor de paquetes deje el archivo nuevo en disco: hay que **reiniciar el servidor web y el servidor de aplicaciones** para que dejen de usar la copia vulnerable ya cargada en memoria. La comprobación se hace listando los procesos que mantienen abiertas bibliotecas eliminadas y se documenta en el parte de la ventana de mantenimiento (§6.2).
 
 ---
 
@@ -188,7 +188,7 @@ Administrar un sistema es, en el fondo, **vigilar y arbitrar el reparto de cuatr
 
 **Hilo.** Un **hilo** (*thread*) es la unidad de planificación dentro de un proceso. Todos los hilos de un proceso **comparten** el espacio de direcciones y los archivos abiertos, pero cada uno tiene su propia pila y sus propios registros.
 
-> **[DATO CLAVE EXAMEN]** **El proceso posee los recursos; el hilo consume CPU.** De ahí que un cambio de contexto entre hilos del mismo proceso sea más barato que entre procesos (no hay que cambiar el espacio de direcciones ni vaciar las cachés de traducción), y de ahí también que un hilo que corrompe memoria pueda tumbar a todos sus hermanos, cosa que no ocurre entre procesos [SILBERSCHATZ] [TANENBAUM].
+> **[DATO CLAVE]** **El proceso posee los recursos; el hilo consume CPU.** De ahí que un cambio de contexto entre hilos del mismo proceso sea más barato que entre procesos (no hay que cambiar el espacio de direcciones ni vaciar las cachés de traducción), y de ahí también que un hilo que corrompe memoria pueda tumbar a todos sus hermanos, cosa que no ocurre entre procesos [SILBERSCHATZ] [TANENBAUM].
 
 **Estados de un proceso.** El modelo clásico de cinco estados: **nuevo → preparado (*ready*) → en ejecución (*running*) → bloqueado/en espera (*waiting*) → terminado**. Un proceso pasa de *ejecución* a *preparado* cuando el planificador le expropia la CPU (fin de su porción de tiempo o *quantum*), y de *ejecución* a *bloqueado* cuando pide una operación de E/S y debe esperar.
 
@@ -217,15 +217,15 @@ kill -TERM 4821                 # petición ordenada de terminación (SIGTERM)
 kill -KILL 4821                 # terminación forzosa, sin posibilidad de cerrar limpiamente (SIGKILL)
 ```
 
-> **[DATO CLAVE EXAMEN]** `SIGTERM` (15) **pide** al proceso que termine y este puede cerrar archivos y guardar estado; `SIGKILL` (9) lo **mata** en el acto y el proceso no puede capturarlo ni ignorarlo. Ante un servicio colgado, la secuencia correcta es siempre **primero `SIGTERM`, y solo si no responde, `SIGKILL`** —matar a lo bruto un gestor de bases de datos puede dejar los datos en un estado que exija recuperación [MAN-PAGES].
+> **[DATO CLAVE]** `SIGTERM` (15) **pide** al proceso que termine y este puede cerrar archivos y guardar estado; `SIGKILL` (9) lo **mata** en el acto y el proceso no puede capturarlo ni ignorarlo. Ante un servicio colgado, la secuencia correcta es siempre **primero `SIGTERM`, y solo si no responde, `SIGKILL`** —matar a lo bruto un gestor de bases de datos puede dejar los datos en un estado que exija recuperación [MAN-PAGES].
 
 **Memoria principal.** El sistema operativo asigna memoria a cada proceso y garantiza que **ninguno pueda leer ni escribir la de otro**. El mecanismo es la **memoria virtual**: cada proceso ve un espacio de direcciones propio y contiguo que la **MMU** traduce a marcos de memoria física mediante **tablas de páginas**, con ayuda de la caché de traducción (**TLB**) [SILBERSCHATZ] [TANENBAUM].
 
 - Cuando un proceso accede a una página que no está en memoria física se produce un **fallo de página** (*page fault*): el núcleo la trae del disco (del archivo de intercambio o del propio ejecutable) y reanuda la instrucción.
 - El área de disco usada para respaldar páginas se llama **espacio de intercambio** (*swap* en Linux; `pagefile.sys` en Windows).
-- Los algoritmos de reemplazo (**LRU**, **FIFO**, **reloj**) deciden qué página se expulsa. La **anomalía de Belady** —que FIFO pueda empeorar al aumentar el número de marcos— es un clásico de examen.
+- Los algoritmos de reemplazo (**LRU**, **FIFO**, **reloj**) deciden qué página se expulsa. La **anomalía de Belady** —que FIFO pueda empeorar al aumentar el número de marcos— es un resultado contraintuitivo.
 
-> **[DATO CLAVE EXAMEN]** La **hiperpaginación** (*thrashing*) es el estado en el que el sistema dedica más tiempo a intercambiar páginas que a ejecutar trabajo útil. Su firma es inconfundible: **CPU de usuario baja, E/S de disco altísima, tiempo de espera de E/S alto y el sistema aparentemente parado**. La solución no es acelerar el disco, sino **reducir el grado de multiprogramación o añadir memoria** [SILBERSCHATZ].
+> **[DATO CLAVE]** La **hiperpaginación** (*thrashing*) es el estado en el que el sistema dedica más tiempo a intercambiar páginas que a ejecutar trabajo útil. Su firma es inconfundible: **CPU de usuario baja, E/S de disco altísima, tiempo de espera de E/S alto y el sistema aparentemente parado**. La solución no es acelerar el disco, sino **reducir el grado de multiprogramación o añadir memoria** [SILBERSCHATZ].
 
 - **Fragmentación interna**: espacio desperdiciado dentro de la unidad asignada (la última página de un proceso rara vez se llena del todo).
 - **Fragmentación externa**: huecos libres demasiado pequeños y dispersos para ser útiles; es propia de la asignación contigua y la paginación la elimina.
@@ -253,7 +253,7 @@ top                    # carga media, %wa (espera de E/S) y procesos por memoria
 | **XFS** | Linux (servidores) | Alto rendimiento con archivos grandes y paralelismo; predeterminado en varias distribuciones empresariales |
 | **Btrfs / ZFS** | Linux / Unix | Sumas de verificación, instantáneas, subvolúmenes y agrupación de dispositivos integrada |
 
-> **[DATO CLAVE EXAMEN]** El **diario** (*journaling*) es lo que permite que un sistema de archivos se recupere en segundos tras un corte de corriente: antes de modificar los metadatos, la operación se anota en un registro; al arrancar, el sistema **repite o descarta** las operaciones incompletas en lugar de recorrer todo el disco. Un sistema **sin diario** (FAT32) obliga a una comprobación completa y puede perder datos [SILBERSCHATZ].
+> **[DATO CLAVE]** El **diario** (*journaling*) es lo que permite que un sistema de archivos se recupere en segundos tras un corte de corriente: antes de modificar los metadatos, la operación se anota en un registro; al arrancar, el sistema **repite o descarta** las operaciones incompletas en lugar de recorrer todo el disco. Un sistema **sin diario** (FAT32) obliga a una comprobación completa y puede perder datos [SILBERSCHATZ].
 
 **Montaje.** En Unix existe **un único árbol** que arranca en la raíz `/`, y cada dispositivo se **monta** en un directorio (`/mnt/datos`); la tabla de montajes persistente es `/etc/fstab`. En Windows, cada volumen recibe tradicionalmente una **letra de unidad** (`C:`), aunque también admite montaje en carpeta vacía. La ubicación normalizada de los directorios en Linux la fija el estándar **FHS**: `/etc` configuración, `/var/log` registros, `/home` usuarios, `/usr` programas, `/tmp` temporales [FHS].
 
@@ -263,7 +263,7 @@ top                    # carga media, %wa (espera de E/S) y procesos por memoria
 2. **Planificación de E/S**: el núcleo reordena las peticiones para reducir el movimiento del cabezal (irrelevante en SSD, donde se usan planificadores más simples).
 3. **DMA e interrupciones**: el dispositivo transfiere datos a memoria sin intervención de la CPU y avisa al terminar mediante una interrupción.
 
-> **[REFERENCIA CRUZADA]** Los **dispositivos físicos** de almacenamiento y sus interfaces (SATA, SAS, NVMe, cabinas, cintas) son objeto del **Tema 12**; los **sistemas de almacenamiento en red y su virtualización** (SAN, NAS, RAID) y las políticas de copia de seguridad, del **Tema 26**; y las **organizaciones de ficheros** desde el punto de vista de las estructuras de datos, del **Tema 13**. Aquí se trata solo la parte que el sistema operativo administra.
+> **[RELACIÓN CON OTROS TEMAS]** Los **dispositivos físicos** de almacenamiento y sus interfaces (SATA, SAS, NVMe, cabinas, cintas) son objeto del **Tema 12**; los **sistemas de almacenamiento en red y su virtualización** (SAN, NAS, RAID) y las políticas de copia de seguridad, del **Tema 26**; y las **organizaciones de ficheros** desde el punto de vista de las estructuras de datos, del **Tema 13**. Aquí se trata solo la parte que el sistema operativo administra.
 
 #### 2.2.1. Volúmenes lógicos, cuotas de disco y dispositivos de bloques
 
@@ -284,7 +284,7 @@ lvextend -L +50G /dev/vg_datos/lv_logs  # 3) se amplía el volumen lógico
 resize2fs /dev/vg_datos/lv_logs         # 4) se amplía el sistema de archivos (ext4) sin desmontar
 ```
 
-> **[DATO CLAVE EXAMEN]** Ampliar espacio en LVM son **dos pasos**, no uno: primero se agranda el **volumen lógico** (`lvextend`) y después el **sistema de archivos** que vive dentro (`resize2fs` en ext4, `xfs_growfs` en XFS). Si solo se hace el primero, `df` sigue mostrando el tamaño antiguo y el administrador cree, erróneamente, que la ampliación no ha funcionado.
+> **[DATO CLAVE]** Ampliar espacio en LVM son **dos pasos**, no uno: primero se agranda el **volumen lógico** (`lvextend`) y después el **sistema de archivos** que vive dentro (`resize2fs` en ext4, `xfs_growfs` en XFS). Si solo se hace el primero, `df` sigue mostrando el tamaño antiguo y el administrador cree, erróneamente, que la ampliación no ha funcionado.
 
 **Cuotas de disco.** Limitan el espacio (o el número de inodos) que un usuario o un grupo puede ocupar en un sistema de archivos. Distinguen dos umbrales [MAN-PAGES]:
 
@@ -293,7 +293,7 @@ resize2fs /dev/vg_datos/lv_logs         # 4) se amplía el sistema de archivos (
 
 Las cuotas cumplen una función que va más allá del ahorro de espacio: **evitan que un solo usuario o proceso agote un volumen compartido** y provoque una caída del servicio, que es una incidencia de **disponibilidad** y, por tanto, materia del ENS [ENS].
 
-> **[EJEMPLO AYTO MADRID]** En un servidor de ficheros compartido por varias unidades de un Distrito se fija una cuota blanda de 20 GiB con siete días de gracia y una cuota dura de 25 GiB por usuario. Además, el volumen de registros del gestor de expedientes se aloja en un **volumen lógico independiente**: así, si un componente entra en un bucle y escribe registros sin control, llena su propio volumen y **no** el del sistema operativo ni el de la base de datos. Separar `/var/log` en su propio volumen es una de las decisiones de diseño que más caídas evita.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** En un servidor de ficheros compartido por varias unidades de un Distrito se fija una cuota blanda de 20 GiB con siete días de gracia y una cuota dura de 25 GiB por usuario. Además, el volumen de registros del gestor de expedientes se aloja en un **volumen lógico independiente**: así, si un componente entra en un bucle y escribe registros sin control, llena su propio volumen y **no** el del sistema operativo ni el de la base de datos. Separar `/var/log` en su propio volumen es una de las decisiones de diseño que más caídas evita.
 
 ---
 
@@ -315,7 +315,7 @@ El **administrador de sistemas** es el responsable de que la plataforma esté di
 | **Documentación y control de cambios** | Inventario, procedimientos, registro de cambios y trazabilidad |
 | **Cumplimiento normativo** | ENS, ENI, protección de datos, contratación y niveles de servicio |
 
-> **[DATO CLAVE EXAMEN]** Las funciones se agrupan en tres planos que conviene no mezclar: **operativas** (lo que se hace a diario con el sistema), **tácticas** (capacidad, mantenimiento planificado, gestión de cambios) y **de gobernanza** (documentación, cumplimiento normativo, niveles de servicio). El error clásico en un supuesto de examen es resolver solo el plano operativo —«reinicio el servicio»— y olvidar el registro del cambio, la comunicación al usuario y la revisión de causa raíz.
+> **[DATO CLAVE]** Las funciones se agrupan en tres planos que conviene no mezclar: **operativas** (lo que se hace a diario con el sistema), **tácticas** (capacidad, mantenimiento planificado, gestión de cambios) y **de gobernanza** (documentación, cumplimiento normativo, niveles de servicio). El error habitual en un supuesto práctico es resolver solo el plano operativo —«reinicio el servicio»— y olvidar el registro del cambio, la comunicación al usuario y la revisión de causa raíz.
 
 ### 3.1. Administración de usuarios, grupos y directivas de seguridad
 
@@ -342,7 +342,7 @@ chmod 750 /srv/expedientes                       # rwx propietario, r-x grupo, n
 - La gestión centralizada se hace con **Active Directory** (dominio, bosque, unidades organizativas) y **directivas de grupo (GPO)**: longitud e historial de contraseñas, bloqueo tras intentos fallidos, derechos de inicio de sesión, configuración de seguridad y despliegue de software.
 - El orden de aplicación de las directivas es **LSDOU**: **L**ocal, **S**itio, **D**ominio y **U**nidad organizativa; **la última en aplicarse gana**, salvo bloqueos de herencia o directivas marcadas como obligatorias.
 
-> **[DATO CLAVE EXAMEN]** Tres reglas que se preguntan mucho: (1) el **SID** de Windows, no el nombre, es lo que llevan las ACL; (2) en una ACL, la **denegación explícita prevalece** sobre cualquier permiso concedido; (3) el orden de precedencia de las GPO es **LSDOU** y **prevalece la última aplicada** (la de la unidad organizativa más cercana al objeto) [MS-GPO].
+> **[DATO CLAVE]** Tres reglas clave: (1) el **SID** de Windows, no el nombre, es lo que llevan las ACL; (2) en una ACL, la **denegación explícita prevalece** sobre cualquier permiso concedido; (3) el orden de precedencia de las GPO es **LSDOU** y **prevalece la última aplicada** (la de la unidad organizativa más cercana al objeto) [MS-GPO].
 
 **Principios de gestión de cuentas** comunes a ambos mundos y exigidos por el ENS [ENS] [ISO27002]:
 
@@ -352,11 +352,11 @@ chmod 750 /srv/expedientes                       # rwx propietario, r-x grupo, n
 4. **Ciclo de vida completo**: alta motivada, revisión periódica de permisos y **baja inmediata** al cesar la relación. Las cuentas de personal que ya no está son uno de los hallazgos más frecuentes en auditoría.
 5. **Gestión de credenciales**: longitud y complejidad, caducidad razonable, bloqueo tras intentos fallidos, prohibición de contraseñas por defecto y **segundo factor** para accesos privilegiados o remotos.
 
-> **[EJEMPLO AYTO MADRID]** Un técnico del IAM tiene dos cuentas: `jlopez`, con la que lee el correo y accede a la intranet, y `adm-jlopez`, incorporada al grupo de administración de servidores y con segundo factor obligatorio, que **no** tiene buzón ni navegación. Si un correo fraudulento compromete la primera, el atacante no obtiene privilegios de administración sobre los servidores del Padrón. Es la aplicación directa del principio de mínimo privilegio y de la separación de funciones del ENS.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Un técnico del IAM tiene dos cuentas: `jlopez`, con la que lee el correo y accede a la intranet, y `adm-jlopez`, incorporada al grupo de administración de servidores y con segundo factor obligatorio, que **no** tiene buzón ni navegación. Si un correo fraudulento compromete la primera, el atacante no obtiene privilegios de administración sobre los servidores del Padrón. Es la aplicación directa del principio de mínimo privilegio y de la separación de funciones del ENS.
 
 #### 3.1.1. Autenticación, autorización y control de acceso local
 
-Tres funciones distintas y consecutivas que el examen suele mezclar:
+Tres funciones distintas y consecutivas que conviene no mezclar:
 
 | Fase | Pregunta que responde | Mecanismos |
 |---|---|---|
@@ -366,7 +366,7 @@ Tres funciones distintas y consecutivas que el examen suele mezclar:
 
 Los **factores de autenticación** se agrupan en tres categorías: **algo que sabes** (contraseña, PIN), **algo que tienes** (tarjeta, token, certificado en dispositivo) y **algo que eres** (biometría). La **autenticación multifactor** exige factores de **categorías distintas**: contraseña + código de una aplicación es multifactor; contraseña + pregunta de seguridad **no lo es**, porque ambos son «algo que sabes».
 
-> **[DATO CLAVE EXAMEN]** Las contraseñas **no se almacenan**: se guarda un **resumen criptográfico (*hash*) con sal** obtenido mediante una función de derivación lenta. La **sal** es un valor aleatorio distinto para cada usuario que impide precalcular tablas de resúmenes y hace que dos usuarios con la misma contraseña tengan resúmenes distintos [ISO27002].
+> **[DATO CLAVE]** Las contraseñas **no se almacenan**: se guarda un **resumen criptográfico (*hash*) con sal** obtenido mediante una función de derivación lenta. La **sal** es un valor aleatorio distinto para cada usuario que impide precalcular tablas de resúmenes y hace que dos usuarios con la misma contraseña tengan resúmenes distintos [ISO27002].
 
 **Modelos de control de acceso** [SILBERSCHATZ]:
 
@@ -382,7 +382,7 @@ Los **factores de autenticación** se agrupan en tres categorías: **algo que sa
 %operadores ALL=(root) /usr/bin/systemctl restart apache2, /usr/bin/journalctl
 ```
 
-> **[REFERENCIA CRUZADA]** Las **técnicas criptográficas**, la firma digital y los certificados que sostienen la autenticación fuerte se desarrollan en el **Tema 32**; el **acceso remoto seguro** y la VPN, en el **Tema 36**; y la **gestión de usuarios a nivel de red**, en el **Tema 30**. Aquí se trata el control de acceso **local** al sistema administrado.
+> **[RELACIÓN CON OTROS TEMAS]** Las **técnicas criptográficas**, la firma digital y los certificados que sostienen la autenticación fuerte se desarrollan en el **Tema 32**; el **acceso remoto seguro** y la VPN, en el **Tema 36**; y la **gestión de usuarios a nivel de red**, en el **Tema 30**. Aquí se trata el control de acceso **local** al sistema administrado.
 
 ### 3.2. Gestión de servicios, demonios y tareas programadas
 
@@ -406,7 +406,7 @@ systemctl list-units --failed       # todo lo que ha fallado: primera parada de 
 journalctl -u apache2 -p err --since "today"
 ```
 
-> **[DATO CLAVE EXAMEN]** `systemctl start` **arranca ahora**; `systemctl enable` **activa el arranque automático** en el próximo inicio. Son operaciones independientes: un servicio puede estar arrancado y no habilitado (desaparecerá tras reiniciar) o habilitado y parado. `enable --now` hace ambas cosas. El equivalente en Windows es el **tipo de inicio** (automático, automático con inicio retrasado, manual, deshabilitado) frente al **estado** (iniciado/detenido) [SYSTEMD] [MS-WINSERVER].
+> **[DATO CLAVE]** `systemctl start` **arranca ahora**; `systemctl enable` **activa el arranque automático** en el próximo inicio. Son operaciones independientes: un servicio puede estar arrancado y no habilitado (desaparecerá tras reiniciar) o habilitado y parado. `enable --now` hace ambas cosas. El equivalente en Windows es el **tipo de inicio** (automático, automático con inicio retrasado, manual, deshabilitado) frente al **estado** (iniciado/detenido) [SYSTEMD] [MS-WINSERVER].
 
 **En Windows**, el **Administrador de control de servicios** gestiona los servicios (`services.msc`, `sc`, `Get-Service`/`Restart-Service`). Dos decisiones de administración son especialmente sensibles:
 
@@ -422,13 +422,13 @@ journalctl -u apache2 -p err --since "today"
 */15 * * * *    /opt/scripts/check_sede.sh        # cada 15 minutos
 ```
 
-> **[DATO CLAVE EXAMEN]** La línea de `cron` tiene **cinco campos** en este orden: **minuto (0-59), hora (0-23), día del mes (1-31), mes (1-12) y día de la semana (0-7, con 0 y 7 = domingo)**. El asterisco significa «todos» y `*/n`, «cada n». Es una pregunta recurrente y se responde solo si se ha memorizado el orden [MAN-PAGES].
+> **[DATO CLAVE]** La línea de `cron` tiene **cinco campos** en este orden: **minuto (0-59), hora (0-23), día del mes (1-31), mes (1-12) y día de la semana (0-7, con 0 y 7 = domingo)**. El asterisco significa «todos» y `*/n`, «cada n». Conviene memorizar el orden [MAN-PAGES].
 
 En Windows, el **Programador de tareas** ofrece desencadenadores más ricos (al iniciar sesión, ante un evento concreto del registro de eventos, al conectarse a la red) y ejecuta con una cuenta configurable. Los **temporizadores de systemd** aportan en Linux ventajas equivalentes: dependencia de otras unidades, registro integrado en el diario, ejecución diferida si el equipo estaba apagado (`Persistent=true`) y márgenes de aleatoriedad para no lanzar mil tareas simultáneas.
 
-**Buenas prácticas de tareas programadas** que se preguntan como criterio profesional: que la tarea sea **idempotente** (dos ejecuciones seguidas no rompen nada), que **registre** su resultado, que **avise** si falla (y no solo si tiene éxito), que use un **bloqueo** para no solaparse consigo misma y que **no** se apoye en la cuenta personal de un técnico —cuando esa persona se va, la tarea deja de ejecutarse—.
+**Buenas prácticas de tareas programadas**, como criterio profesional: que la tarea sea **idempotente** (dos ejecuciones seguidas no rompen nada), que **registre** su resultado, que **avise** si falla (y no solo si tiene éxito), que use un **bloqueo** para no solaparse consigo misma y que **no** se apoye en la cuenta personal de un técnico —cuando esa persona se va, la tarea deja de ejecutarse—.
 
-> **[EJEMPLO AYTO MADRID]** La carga nocturna de variaciones del Padrón se planifica a las 02:30, fuera del horario de atención, con un bloqueo que impide que una carga anormalmente larga se solape con la del día siguiente, con envío de correo al buzón del equipo de explotación **tanto si acaba bien como si falla**, y con la salida volcada a un archivo de registro fechado que se conserva conforme a la política de retención. La tarea se ejecuta con una **cuenta de servicio**, nunca con la cuenta nominal del técnico que la creó.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** La carga nocturna de variaciones del Padrón se planifica a las 02:30, fuera del horario de atención, con un bloqueo que impide que una carga anormalmente larga se solape con la del día siguiente, con envío de correo al buzón del equipo de explotación **tanto si acaba bien como si falla**, y con la salida volcada a un archivo de registro fechado que se conserva conforme a la política de retención. La tarea se ejecuta con una **cuenta de servicio**, nunca con la cuenta nominal del técnico que la creó.
 
 ---
 
@@ -448,7 +448,7 @@ La documentación no es burocracia añadida: es la condición para que el servic
 - **Criticidad** y categoría de seguridad del sistema al que pertenece.
 - Fechas relevantes: instalación, garantía, **fin de soporte del fabricante**.
 
-> **[DATO CLAVE EXAMEN]** El ENS convierte el inventario en una obligación: la medida **`op.exp.1` (Inventario de activos)** del anexo II del Real Decreto 311/2022 exige mantener «un inventario actualizado de todos los elementos del sistema» y **se aplica en las tres categorías** (BÁSICA, MEDIA y ALTA), sin excepción [ENS]. Es la medida de la que dependen todas las demás: el análisis de riesgos, la gestión de parches y la recuperación.
+> **[DATO CLAVE]** El ENS convierte el inventario en una obligación: la medida **`op.exp.1` (Inventario de activos)** del anexo II del Real Decreto 311/2022 exige mantener «un inventario actualizado de todos los elementos del sistema» y **se aplica en las tres categorías** (BÁSICA, MEDIA y ALTA), sin excepción [ENS]. Es la medida de la que dependen todas las demás: el análisis de riesgos, la gestión de parches y la recuperación.
 
 **Documentación de sistemas.** Debe ser suficiente para reconstruir el servicio desde cero:
 
@@ -468,11 +468,11 @@ La documentación no es burocracia añadida: es la condición para que el servic
 - **Cambio normal**: evaluado y aprobado por el comité de cambios antes de ejecutarse.
 - **Cambio de emergencia**: se ejecuta primero para resolver una caída y **se documenta y aprueba después**, sin excepción.
 
-> **[DATO CLAVE EXAMEN]** No hay que confundir **incidencia**, **problema** y **cambio**: la **incidencia** es una interrupción o degradación del servicio y su objetivo es **restablecerlo cuanto antes** (aunque sea con una solución temporal); el **problema** es la **causa subyacente** de una o varias incidencias y su objetivo es eliminarla; el **cambio** es la modificación controlada que se introduce en el entorno. Reiniciar un servidor cerrado es gestión de **incidencias**; averiguar por qué se cuelga cada martes es gestión de **problemas** [ITIL] [ISO20000].
+> **[DATO CLAVE]** No hay que confundir **incidencia**, **problema** y **cambio**: la **incidencia** es una interrupción o degradación del servicio y su objetivo es **restablecerlo cuanto antes** (aunque sea con una solución temporal); el **problema** es la **causa subyacente** de una o varias incidencias y su objetivo es eliminarla; el **cambio** es la modificación controlada que se introduce en el entorno. Reiniciar un servidor cerrado es gestión de **incidencias**; averiguar por qué se cuelga cada martes es gestión de **problemas** [ITIL] [ISO20000].
 
 **Automatización y «infraestructura como código».** Cuando el parque crece, los procedimientos manuales dejan de ser fiables: se automatizan con guiones y herramientas de gestión de configuración, cuyo código se guarda en un **repositorio con control de versiones**. La ventaja para la administración pública es doble: el estado del sistema queda **documentado por construcción** y cualquier cambio queda **trazado** con autor y fecha.
 
-> **[EJEMPLO AYTO MADRID]** Antes de una ventana de mantenimiento sobre los servidores del Padrón, el equipo del IAM publica un **plan de cambio** que incluye: alcance y máquinas afectadas, ventana horaria (fuera del horario de atención), procedimiento paso a paso, pruebas de verificación posteriores, **plan de marcha atrás** con instantáneas previas, responsable de la ejecución y aviso a las unidades usuarias. Terminada la intervención, el resultado se anota en la bitácora y se cierra el cambio. Si algo falla dos meses después, ese registro es lo que permite reconstruir qué se tocó.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Antes de una ventana de mantenimiento sobre los servidores del Padrón, el equipo del IAM publica un **plan de cambio** que incluye: alcance y máquinas afectadas, ventana horaria (fuera del horario de atención), procedimiento paso a paso, pruebas de verificación posteriores, **plan de marcha atrás** con instantáneas previas, responsable de la ejecución y aviso a las unidades usuarias. Terminada la intervención, el resultado se anota en la bitácora y se cierra el cambio. Si algo falla dos meses después, ese registro es lo que permite reconstruir qué se tocó.
 
 ### 4.2. Marco legal, gobernanza y seguridad en la Administración pública
 
@@ -487,7 +487,7 @@ Administrar sistemas en el Ayuntamiento de Madrid no es lo mismo que administrar
 | **RGPD y LO 3/2018** | Confidencialidad, integridad y **disponibilidad** de los datos personales; capacidad de **restaurar** el acceso tras un incidente; notificación de brechas [RGPD] |
 | **Normativa municipal** | Ordenanza de Atención a la Ciudadanía y Administración Electrónica y política de seguridad del Ayuntamiento [ORD-ADMON-E] |
 
-> **[DATO CLAVE EXAMEN]** El **artículo 32 del RGPD** exige expresamente «la capacidad de **restaurar** la disponibilidad y el acceso a los datos personales de forma rápida en caso de incidente físico o técnico» y «un proceso de **verificación, evaluación y valoración regulares** de la eficacia de las medidas». Traducido a la práctica del administrador: **las copias de seguridad y las pruebas de restauración no son una buena práctica, son una obligación legal** [RGPD].
+> **[DATO CLAVE]** El **artículo 32 del RGPD** exige expresamente «la capacidad de **restaurar** la disponibilidad y el acceso a los datos personales de forma rápida en caso de incidente físico o técnico» y «un proceso de **verificación, evaluación y valoración regulares** de la eficacia de las medidas». Traducido a la práctica del administrador: **las copias de seguridad y las pruebas de restauración no son una buena práctica, son una obligación legal** [RGPD].
 
 **Gobernanza.** El ENS obliga a **diferenciar cuatro responsabilidades** que no deben recaer en la misma persona (artículo 11 del RD 311/2022) [ENS]:
 
@@ -498,11 +498,11 @@ Administrar sistemas en el Ayuntamiento de Madrid no es lo mismo que administrar
 | **Responsable de la seguridad** | Determina las decisiones para satisfacer esos requisitos y supervisa su implantación |
 | **Responsable del sistema** | Explota el sistema y aplica las medidas; es el papel más próximo al administrador |
 
-> **[DATO CLAVE EXAMEN]** El mismo artículo 11 añade una regla que se pregunta con frecuencia: la responsabilidad **de la seguridad** debe estar **diferenciada** de la responsabilidad sobre la **explotación** del sistema. Es decir, quien administra los servidores **no** puede ser, a la vez, quien decide y supervisa si esa administración es segura [ENS].
+> **[DATO CLAVE]** El mismo artículo 11 añade una regla clave: la responsabilidad **de la seguridad** debe estar **diferenciada** de la responsabilidad sobre la **explotación** del sistema. Es decir, quien administra los servidores **no** puede ser, a la vez, quien decide y supervisa si esa administración es segura [ENS].
 
 **Deberes del empleado público que administra sistemas.** El acceso privilegiado conlleva obligaciones específicas: **confidencialidad** sobre la información a la que se accede por razón del puesto (deber que persiste tras el cese), acceso **solo por necesidad de servicio** —consultar los datos padronales de una persona por curiosidad es una infracción, aunque el sistema lo permita técnicamente—, uso de las herramientas corporativas conforme a la normativa interna, y comunicación inmediata de cualquier incidente de seguridad detectado.
 
-> **[REFERENCIA CRUZADA]** Los **derechos y deberes del empleado público**, incluido el régimen disciplinario, son objeto del **Tema 5** (TREBEP); el **derecho de acceso a la información pública y la transparencia**, del **Tema 6**; y los **principios del ENS y del ENI** en su conjunto, del **Tema 39**. Aquí se desarrollan únicamente las medidas del ENS que afectan de forma directa a la administración, actualización y recuperación del sistema operativo.
+> **[RELACIÓN CON OTROS TEMAS]** Los **derechos y deberes del empleado público**, incluido el régimen disciplinario, son objeto del **Tema 5** (TREBEP); el **derecho de acceso a la información pública y la transparencia**, del **Tema 6**; y los **principios del ENS y del ENI** en su conjunto, del **Tema 39**. Aquí se desarrollan únicamente las medidas del ENS que afectan de forma directa a la administración, actualización y recuperación del sistema operativo.
 
 #### 4.2.1. Aplicación del Esquema Nacional de Seguridad (ENS)
 
@@ -520,7 +520,7 @@ El **Real Decreto 311/2022, de 3 de mayo**, regula el Esquema Nacional de Seguri
 
 **Requisitos mínimos de seguridad** (artículo 12 y siguientes). La política de seguridad debe satisfacer, entre otros, los requisitos que desarrollan los artículos 13 a 27: organización e implantación del proceso de seguridad, análisis y gestión de los riesgos, gestión de personal, profesionalidad, autorización y control de los accesos, protección de las instalaciones, adquisición de productos y contratación de servicios de seguridad, **mínimo privilegio**, **integridad y actualización del sistema**, protección de la información almacenada y en tránsito, prevención ante otros sistemas interconectados, **registro de actividad y detección de código dañino**, incidentes de seguridad, **continuidad de la actividad** y mejora continua [ENS].
 
-> **[DATO CLAVE EXAMEN]** El **artículo 21 (Integridad y actualización del sistema)** es el que ata este tema al ENS: exige **autorización formal previa** para incluir o modificar cualquier elemento físico o lógico del catálogo de activos, y una **evaluación y monitorización permanentes** que permitan adecuar el estado de seguridad atendiendo a deficiencias de configuración, vulnerabilidades identificadas y actualizaciones que afecten al sistema [ENS].
+> **[DATO CLAVE]** El **artículo 21 (Integridad y actualización del sistema)** es el que ata este tema al ENS: exige **autorización formal previa** para incluir o modificar cualquier elemento físico o lógico del catálogo de activos, y una **evaluación y monitorización permanentes** que permitan adecuar el estado de seguridad atendiendo a deficiencias de configuración, vulnerabilidades identificadas y actualizaciones que afecten al sistema [ENS].
 
 **Dimensiones y categorías.** El anexo I define **cinco dimensiones de seguridad**: **disponibilidad [D], integridad [I], confidencialidad [C], autenticidad [A] y trazabilidad [T]**. Cada información y cada servicio se valora en cada dimensión con un nivel **BAJO, MEDIO o ALTO**, y de ahí se deriva la **categoría del sistema**:
 
@@ -528,7 +528,7 @@ El **Real Decreto 311/2022, de 3 de mayo**, regula el Esquema Nacional de Seguri
 - **MEDIA**, si alguna alcanza nivel MEDIO y ninguna supera ese nivel.
 - **BÁSICA**, si alguna alcanza nivel BAJO y ninguna lo supera.
 
-> **[DATO CLAVE EXAMEN]** Mnemotécnica de las cinco dimensiones: **D-I-C-A-T** (Disponibilidad, Integridad, Confidencialidad, Autenticidad y Trazabilidad). Y la regla de categorización: **manda la dimensión más alta**; basta con que una sola dimensión sea ALTA para que todo el sistema sea de categoría ALTA [ENS].
+> **[DATO CLAVE]** Mnemotécnica de las cinco dimensiones: **D-I-C-A-T** (Disponibilidad, Integridad, Confidencialidad, Autenticidad y Trazabilidad). Y la regla de categorización: **manda la dimensión más alta**; basta con que una sola dimensión sea ALTA para que todo el sistema sea de categoría ALTA [ENS].
 
 **Medidas del anexo II.** Se agrupan en tres bloques: **marco organizativo [org]**, **marco operacional [op]** y **medidas de protección [mp]**. Las que interesan directamente a este tema son:
 
@@ -544,11 +544,11 @@ El **Real Decreto 311/2022, de 3 de mayo**, regula el Esquema Nacional de Seguri
 | `op.cont.1-4` | Análisis de impacto, plan de continuidad, pruebas periódicas y medios alternativos | §8.2 — dimensión **disponibilidad** |
 | `mp.info.6` | Copias de seguridad | §8.2 — dimensión **disponibilidad** |
 
-> **[DATO CLAVE EXAMEN]** La medida **`op.exp.4` (Mantenimiento y actualizaciones de seguridad)** exige: atender a las especificaciones del fabricante con **seguimiento continuo de los anuncios de defectos**, y disponer de **un procedimiento para analizar, priorizar y determinar cuándo aplicar** actualizaciones, parches, mejoras y nuevas versiones, priorizando según la variación del riesgo; el mantenimiento **solo lo realizará personal debidamente autorizado**. Sus refuerzos son igual de reveladores: **R1, pruebas en preproducción** (a partir de categoría MEDIA) y **R2, prevención de fallos**, que obliga a prever **un mecanismo para revertir** los parches «en caso de aparición de efectos adversos» (categoría ALTA) [ENS].
+> **[DATO CLAVE]** La medida **`op.exp.4` (Mantenimiento y actualizaciones de seguridad)** exige: atender a las especificaciones del fabricante con **seguimiento continuo de los anuncios de defectos**, y disponer de **un procedimiento para analizar, priorizar y determinar cuándo aplicar** actualizaciones, parches, mejoras y nuevas versiones, priorizando según la variación del riesgo; el mantenimiento **solo lo realizará personal debidamente autorizado**. Sus refuerzos son igual de reveladores: **R1, pruebas en preproducción** (a partir de categoría MEDIA) y **R2, prevención de fallos**, que obliga a prever **un mecanismo para revertir** los parches «en caso de aparición de efectos adversos» (categoría ALTA) [ENS].
 
 **Auditoría.** Los sistemas del ámbito del ENS se someten a **auditoría regular ordinaria al menos cada dos años**, y con carácter **extraordinario** siempre que se produzcan modificaciones sustanciales que puedan repercutir en las medidas de seguridad requeridas; los sistemas de **categoría BÁSICA** no necesitan auditoría, sino una **autoevaluación** para declarar su conformidad [ENS].
 
-> **[EJEMPLO AYTO MADRID]** El sistema que soporta la Sede Electrónica se categoriza atendiendo a las cinco dimensiones: la **disponibilidad** es alta (una caída impide presentar escritos en plazo), la **trazabilidad** y la **autenticidad** son determinantes (hay que poder acreditar quién presentó qué y cuándo) y la **confidencialidad** afecta a datos personales. La categoría resultante arrastra la exigencia de las medidas reforzadas: pruebas en preproducción antes de parchear, mecanismo de marcha atrás, registro de actividad protegido y plan de continuidad probado periódicamente. Cada una de esas obligaciones se traduce en una tarea concreta de las secciones siguientes.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** El sistema que soporta la Sede Electrónica se categoriza atendiendo a las cinco dimensiones: la **disponibilidad** es alta (una caída impide presentar escritos en plazo), la **trazabilidad** y la **autenticidad** son determinantes (hay que poder acreditar quién presentó qué y cuándo) y la **confidencialidad** afecta a datos personales. La categoría resultante arrastra la exigencia de las medidas reforzadas: pruebas en preproducción antes de parchear, mecanismo de marcha atrás, registro de actividad protegido y plan de continuidad probado periódicamente. Cada una de esas obligaciones se traduce en una tarea concreta de las secciones siguientes.
 
 ---
 
@@ -565,11 +565,11 @@ La norma **ISO/IEC 14764** clasifica el mantenimiento del software en **cuatro t
 | **Perfectivo** | Para **mejorar** rendimiento o mantenibilidad sin corregir un fallo | Ajustar parámetros del núcleo, reorganizar volúmenes, automatizar una tarea manual |
 | **Adaptativo** | Para **acomodar** cambios del entorno | Migrar a una versión soportada del sistema, adaptar el sistema a un nuevo hardware o a un cambio normativo |
 
-> **[DATO CLAVE EXAMEN]** El enunciado del tema habla de mantenimiento **preventivo, correctivo y evolutivo**. La equivalencia con la norma es directa: **evolutivo = perfectivo + adaptativo**. Y el criterio que los separa es **el momento y la causa**: el correctivo es *reactivo* (ya ha fallado), el preventivo es *proactivo* (aún no ha fallado pero fallará) y el evolutivo *no responde a ningún fallo*, sino a una mejora o a un cambio del entorno [ISO14764].
+> **[DATO CLAVE]** El enunciado del tema habla de mantenimiento **preventivo, correctivo y evolutivo**. La equivalencia con la norma es directa: **evolutivo = perfectivo + adaptativo**. Y el criterio que los separa es **el momento y la causa**: el correctivo es *reactivo* (ya ha fallado), el preventivo es *proactivo* (aún no ha fallado pero fallará) y el evolutivo *no responde a ningún fallo*, sino a una mejora o a un cambio del entorno [ISO14764].
 
 Una cuarta categoría de uso frecuente en la práctica pública es el **mantenimiento predictivo**: usar datos de telemetría para estimar **cuándo** fallará un componente y actuar justo antes. Es la evolución natural del preventivo apoyada en la monitorización de §5.2 (por ejemplo, los atributos **S.M.A.R.T.** de un disco: sectores reasignados, sectores pendientes, horas de encendido, desgaste de la memoria NAND en una SSD) [SMART-DOC].
 
-**Tareas típicas de mantenimiento preventivo** de un sistema operativo, que conviene tener listadas porque son material directo de examen y de caso práctico:
+**Tareas típicas de mantenimiento preventivo** de un sistema operativo, que conviene tener listadas:
 
 - **Rotación y purga de registros** (`logrotate` en Linux, tamaño máximo y sobrescritura en el Visor de eventos): impide que `/var/log` llene el disco.
 - **Limpieza de temporales** y de versiones antiguas de paquetes y de núcleos (`/boot` lleno es una avería clásica que impide instalar el siguiente núcleo).
@@ -581,11 +581,11 @@ Una cuarta categoría de uso frecuente en la práctica pública es el **mantenim
 - **Revisión de cuentas** activas, caducidades y permisos.
 - **Desfragmentación** (solo en discos mecánicos con NTFS; **en SSD no se desfragmenta**, se ejecuta `TRIM`).
 
-> **[DATO CLAVE EXAMEN]** Desfragmentar una **unidad de estado sólido** no aporta ninguna mejora y **consume ciclos de escritura**, acortando su vida. En SSD la operación correcta es **TRIM/optimización**, que informa al dispositivo de qué bloques ya no contienen datos válidos. Windows lo distingue automáticamente: al «optimizar» una SSD ejecuta TRIM, no desfragmentación.
+> **[DATO CLAVE]** Desfragmentar una **unidad de estado sólido** no aporta ninguna mejora y **consume ciclos de escritura**, acortando su vida. En SSD la operación correcta es **TRIM/optimización**, que informa al dispositivo de qué bloques ya no contienen datos válidos. Windows lo distingue automáticamente: al «optimizar» una SSD ejecuta TRIM, no desfragmentación.
 
 **Ventanas de mantenimiento.** El mantenimiento planificado se ejecuta en una **ventana** acordada con los responsables funcionales: franja horaria de bajo impacto, comunicada con antelación, con criterios de aceptación y hora límite de decisión (el momento a partir del cual, si la intervención no ha terminado, se ejecuta la marcha atrás). Una **parada planificada y avisada** no cuenta como indisponibilidad a efectos del acuerdo de nivel de servicio; una parada **imprevista**, sí.
 
-> **[EJEMPLO AYTO MADRID]** El mantenimiento de los servidores de la Sede Electrónica se planifica en fin de semana o de madrugada, nunca en las horas de mayor presentación de escritos ni en los días finales del plazo de una convocatoria masiva. La razón no es de comodidad: una caída del registro electrónico durante el último día de un plazo tiene consecuencias jurídicas sobre los interesados [L3915].
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** El mantenimiento de los servidores de la Sede Electrónica se planifica en fin de semana o de madrugada, nunca en las horas de mayor presentación de escritos ni en los días finales del plazo de una convocatoria masiva. La razón no es de comodidad: una caída del registro electrónico durante el último día de un plazo tiene consecuencias jurídicas sobre los interesados [L3915].
 
 ### 5.2. Monitorización del rendimiento y gestión de capacidad
 
@@ -598,7 +598,7 @@ Los cuatro elementos de un sistema de monitorización son:
 3. **Umbrales y alertas**, con severidad y destinatario.
 4. **Visualización e informes** para el análisis y para el acuerdo de nivel de servicio.
 
-> **[DATO CLAVE EXAMEN]** Una **línea base** (*baseline*) es la medición del comportamiento **normal** del sistema —por franja horaria y por día de la semana— con la que se comparan las mediciones posteriores. Sin línea base, la afirmación «el servidor va lento» no es verificable: no se sabe respecto de qué. Establecer la línea base tras cada cambio importante es parte del mantenimiento [MS-PERF].
+> **[DATO CLAVE]** Una **línea base** (*baseline*) es la medición del comportamiento **normal** del sistema —por franja horaria y por día de la semana— con la que se comparan las mediciones posteriores. Sin línea base, la afirmación «el servidor va lento» no es verificable: no se sabe respecto de qué. Establecer la línea base tras cada cambio importante es parte del mantenimiento [MS-PERF].
 
 **Disponibilidad y niveles de servicio.** La disponibilidad se expresa en porcentaje y se traduce en tiempo de caída admisible al año, cifra que conviene memorizar:
 
@@ -619,7 +619,7 @@ Dos indicadores complementarios de fiabilidad: **MTBF** (tiempo medio entre fall
 - Vigilar el **crecimiento del almacenamiento**, que es monótono y por tanto el más fácil de proyectar.
 - Distinguir **escalado vertical** (más recursos en la misma máquina) de **escalado horizontal** (más máquinas repartiendo la carga).
 
-> **[EJEMPLO AYTO MADRID]** El volumen de registros del gestor de expedientes crece unos 4 GiB al mes y quedan 30 GiB libres: la proyección lineal indica agotamiento en unos siete meses. La gestión de capacidad convierte ese dato en una tarea planificada —ampliar el volumen lógico o ajustar la retención— **antes** de que se convierta en una incidencia a las tres de la madrugada de un día de campaña de tributos.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** El volumen de registros del gestor de expedientes crece unos 4 GiB al mes y quedan 30 GiB libres: la proyección lineal indica agotamiento en unos siete meses. La gestión de capacidad convierte ese dato en una tarea planificada —ampliar el volumen lógico o ajustar la retención— **antes** de que se convierta en una incidencia a las tres de la madrugada de un día de campaña de tributos.
 
 #### 5.2.1. Análisis de métricas (CPU, memoria, E/S) y ajuste del sistema
 
@@ -659,7 +659,7 @@ En Windows, las herramientas equivalentes son el **Administrador de tareas** (vi
 
 **Ajuste del sistema (*tuning*).** Es la fase final: modificar parámetros para adecuar el comportamiento del sistema a la carga real. Ejemplos habituales: **`swappiness`** en Linux (cuánta tendencia hay a intercambiar frente a descartar caché), límites de descriptores de archivo por proceso (`ulimit -n`, decisivo en servidores con muchas conexiones), parámetros de la pila de red, planificador de E/S adecuado al tipo de disco, tamaño de la memoria intermedia de la base de datos, o número de trabajadores del servidor web.
 
-> **[DATO CLAVE EXAMEN]** Tres reglas del ajuste que se preguntan como criterio profesional: (1) **medir antes y después** —sin línea base no hay mejora demostrable—; (2) **cambiar un parámetro cada vez**, o será imposible saber cuál produjo el efecto; (3) **documentar el cambio** y su justificación, porque el ajuste es un cambio en producción como cualquier otro y le aplica la gestión de cambios (`op.exp.5` del ENS) [ENS] [ISO20000].
+> **[DATO CLAVE]** Tres reglas del ajuste, como criterio profesional: (1) **medir antes y después** —sin línea base no hay mejora demostrable—; (2) **cambiar un parámetro cada vez**, o será imposible saber cuál produjo el efecto; (3) **documentar el cambio** y su justificación, porque el ajuste es un cambio en producción como cualquier otro y le aplica la gestión de cambios (`op.exp.5` del ENS) [ENS] [ISO20000].
 
 ---
 
@@ -676,7 +676,7 @@ Todo sistema operativo tiene un **ciclo de vida** publicado por su fabricante o 
 | **Soporte extendido** | Solo correcciones de seguridad (a veces de pago); no hay evolución funcional |
 | **Fin de vida (EOL)** | **No** hay más actualizaciones, ni siquiera de seguridad |
 
-> **[DATO CLAVE EXAMEN]** Un sistema **fuera de soporte** no es «un sistema viejo que funciona»: es un sistema en el que **cada nueva vulnerabilidad descubierta queda sin corregir para siempre**. Mantenerlo en producción en una Administración pública contradice el requisito de **integridad y actualización del sistema** (artículo 21 del ENS) y la medida `op.exp.4`, y por tanto es un incumplimiento normativo, no solo un riesgo técnico [ENS].
+> **[DATO CLAVE]** Un sistema **fuera de soporte** no es «un sistema viejo que funciona»: es un sistema en el que **cada nueva vulnerabilidad descubierta queda sin corregir para siempre**. Mantenerlo en producción en una Administración pública contradice el requisito de **integridad y actualización del sistema** (artículo 21 del ENS) y la medida `op.exp.4`, y por tanto es un incumplimiento normativo, no solo un riesgo técnico [ENS].
 
 Cuando no queda más remedio que convivir temporalmente con un sistema fuera de soporte (porque una aplicación crítica no funciona en versiones nuevas), la respuesta profesional es documentar la **excepción** con su análisis de riesgo, su fecha límite y sus **medidas compensatorias**: aislamiento en un segmento de red propio, restricción de accesos, refuerzo de la monitorización y plan de migración con fecha.
 
@@ -697,7 +697,7 @@ Cuando no queda más remedio que convivir temporalmente con un sistema fuera de 
 - **MENOR**: funcionalidad nueva **compatible** hacia atrás.
 - **PARCHE**: corrección de errores sin cambios de interfaz.
 
-> **[DATO CLAVE EXAMEN]** Ante `4.2.7 → 4.2.9` la expectativa razonable es un cambio de bajo riesgo (solo correcciones); ante `4.2.7 → 5.0.0`, un cambio **de alto riesgo** que puede romper la compatibilidad y que **nunca** debe aplicarse directamente en producción sin pasar por el entorno de pruebas [SEMVER].
+> **[DATO CLAVE]** Ante `4.2.7 → 4.2.9` la expectativa razonable es un cambio de bajo riesgo (solo correcciones); ante `4.2.7 → 5.0.0`, un cambio **de alto riesgo** que puede romper la compatibilidad y que **nunca** debe aplicarse directamente en producción sin pasar por el entorno de pruebas [SEMVER].
 
 **Distinción entre versión LTS y versión de ciclo corto.** Las versiones **de soporte a largo plazo** (LTS) reciben mantenimiento durante años y son las adecuadas para servidores de una Administración; las versiones de ciclo corto aportan novedades pero obligan a actualizar cada pocos meses. Elegir LTS es una decisión de **mantenibilidad**, no de conservadurismo.
 
@@ -710,7 +710,7 @@ Cuando no queda más remedio que convivir temporalmente con un sistema fuera de 
 | 7,0 – 8,9 | Alta |
 | 9,0 – 10,0 | **Crítica** |
 
-> **[DATO CLAVE EXAMEN]** **CVE identifica; CVSS puntúa.** Y la puntuación CVSS **no** es, por sí sola, la prioridad de parcheo: hay que ponderarla con la **exposición real** del activo (¿está publicado en Internet?), su **criticidad** para el servicio y la **existencia de un exploit** en circulación. Una vulnerabilidad CVSS 9,8 en un servicio que está deshabilitado puede ser menos urgente que una CVSS 7,0 explotada activamente en un servidor publicado [NIST80040].
+> **[DATO CLAVE]** **CVE identifica; CVSS puntúa.** Y la puntuación CVSS **no** es, por sí sola, la prioridad de parcheo: hay que ponderarla con la **exposición real** del activo (¿está publicado en Internet?), su **criticidad** para el servicio y la **existencia de un exploit** en circulación. Una vulnerabilidad CVSS 9,8 en un servicio que está deshabilitado puede ser menos urgente que una CVSS 7,0 explotada activamente en un servidor publicado [NIST80040].
 
 Un caso particular es el **día cero** (*zero-day*): vulnerabilidad conocida y explotada para la que **aún no existe parche**. La respuesta no es esperar: se aplican **mitigaciones temporales** (deshabilitar la función afectada, filtrar en el cortafuegos, restringir accesos, reforzar la vigilancia) hasta que el fabricante publique la corrección, y se documenta la actuación.
 
@@ -727,7 +727,7 @@ El proceso de gestión de parches del NIST tiene seis pasos que se pueden recita
 
 **Herramientas de despliegue centralizado.** Parchear máquina a máquina no es viable en un parque de miles de puestos. Se usan servidores de actualizaciones internos (**WSUS**, **Windows Update for Business** o una herramienta de gestión de configuración en el mundo Windows [MS-WSUS]; **réplicas locales de repositorios** de paquetes con `apt`/`dnf` y herramientas de gestión de configuración en Linux), que permiten **aprobar** qué actualizaciones se distribuyen, **a qué grupos** y **cuándo**, y **medir** el porcentaje de cumplimiento.
 
-> **[DATO CLAVE EXAMEN]** La ventaja decisiva de un servidor interno de actualizaciones no es el ahorro de ancho de banda, sino el **control**: permite **aprobar selectivamente** los parches ya validados, desplegarlos **por anillos** y obtener un **informe de cumplimiento** que acredita ante una auditoría del ENS qué porcentaje del parque está al día [MS-WSUS] [ENS].
+> **[DATO CLAVE]** La ventaja decisiva de un servidor interno de actualizaciones no es el ahorro de ancho de banda, sino el **control**: permite **aprobar selectivamente** los parches ya validados, desplegarlos **por anillos** y obtener un **informe de cumplimiento** que acredita ante una auditoría del ENS qué porcentaje del parque está al día [MS-WSUS] [ENS].
 
 **Despliegue por anillos.** El parche recorre etapas con verificación entre ellas:
 
@@ -740,7 +740,7 @@ El proceso de gestión de parches del NIST tiene seis pasos que se pueden recita
 
 **Comunicación y registro.** Toda actualización que implique reinicio o pérdida de servicio se **comunica con antelación** a las unidades afectadas y se registra como cambio (`op.exp.5`). Tras el despliegue se emite un **informe de cumplimiento**: equipos actualizados, equipos con error, equipos no localizados (que suelen ser el verdadero problema: portátiles apagados o fuera de la red durante semanas).
 
-> **[EJEMPLO AYTO MADRID]** El segundo martes de cada mes se publican las actualizaciones acumulativas de Windows. El IAM las aprueba en el servidor interno el mismo día para el anillo de laboratorio, el jueves para el piloto (equipo de sistemas y una unidad voluntaria de un Distrito), la semana siguiente para los puestos de usuario y, por último, en la ventana del fin de semana, para los servidores de la Sede Electrónica, con instantánea previa de cada máquina virtual. Una actualización con calificación **crítica y explotación activa** rompe este calendario y se tramita como **cambio de emergencia**.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** El segundo martes de cada mes se publican las actualizaciones acumulativas de Windows. El IAM las aprueba en el servidor interno el mismo día para el anillo de laboratorio, el jueves para el piloto (equipo de sistemas y una unidad voluntaria de un Distrito), la semana siguiente para los puestos de usuario y, por último, en la ventana del fin de semana, para los servidores de la Sede Electrónica, con instantánea previa de cada máquina virtual. Una actualización con calificación **crítica y explotación activa** rompe este calendario y se tramita como **cambio de emergencia**.
 
 #### 6.2.1. Evaluaciones de impacto, entornos de prueba y mecanismos de marcha atrás
 
@@ -769,9 +769,9 @@ Este epígrafe es, en la práctica, la traducción operativa de los refuerzos **
 | **Reversión del controlador** | Fallo tras actualizar un controlador | Sirve para un componente, no para el sistema |
 | **Restauración desde copia de seguridad** | Último recurso | Es el más lento: implica asumir el RPO |
 
-> **[DATO CLAVE EXAMEN]** Una **instantánea no es una copia de seguridad**. La instantánea depende del mismo almacenamiento y del mismo sistema: si se pierde la cabina o se cifra el volumen en un ataque de secuestro de datos, se pierden el original **y** la instantánea. Sirve para deshacer un cambio en minutos; no sustituye a la copia externa e independiente [NIST80034].
+> **[DATO CLAVE]** Una **instantánea no es una copia de seguridad**. La instantánea depende del mismo almacenamiento y del mismo sistema: si se pierde la cabina o se cifra el volumen en un ataque de secuestro de datos, se pierden el original **y** la instantánea. Sirve para deshacer un cambio en minutos; no sustituye a la copia externa e independiente [NIST80034].
 
-> **[DATO CLAVE EXAMEN]** Regla de oro del parcheo: **no se aplica un cambio en producción si no se sabe deshacerlo**. El ENS la convierte en obligación en el refuerzo R2 de `op.exp.4`: antes de aplicar configuraciones, parches y actualizaciones de seguridad se preverá «un mecanismo para revertirlos en caso de aparición de efectos adversos» [ENS].
+> **[DATO CLAVE]** Regla de oro del parcheo: **no se aplica un cambio en producción si no se sabe deshacerlo**. El ENS la convierte en obligación en el refuerzo R2 de `op.exp.4`: antes de aplicar configuraciones, parches y actualizaciones de seguridad se preverá «un mecanismo para revertirlos en caso de aparición de efectos adversos» [ENS].
 
 > **[EJERCICIO RESUELTO]** *Tras el parcheo mensual, veinte puestos de un Distrito no arrancan: pantalla azul en el inicio. ¿Cómo se actúa?* **Solución, por orden**: (1) **Contener**: detener inmediatamente el despliegue del parche en el servidor interno de actualizaciones para que no alcance a más equipos —contener antes que diagnosticar—. (2) **Restablecer el servicio**: arrancar los equipos afectados en **modo seguro** o en el entorno de recuperación y **desinstalar la actualización** o revertir el controlador implicado; si no basta, restaurar el punto anterior. (3) **Diagnosticar**: comparar qué tienen en común esos veinte puestos y no el resto (mismo modelo, mismo controlador gráfico, mismo software de cifrado). (4) **Registrar** la incidencia y abrir un **problema** para la causa raíz, comunicando el hallazgo al fabricante. (5) **Reprogramar** el despliegue con el controlador actualizado y una prueba específica en un equipo de ese modelo en el anillo piloto. La lección: el fallo no fue el parche, fue que **el anillo piloto no incluía ese modelo de equipo**.
 
@@ -796,7 +796,7 @@ Un **registro** (*log*) es la anotación fechada de un suceso relevante del sist
 | 6 | `info` | Informativo |
 | 7 | `debug` | Depuración |
 
-> **[DATO CLAVE EXAMEN]** En syslog, **cuanto menor es el número, más grave es el mensaje**: `0 = emerg` es lo más grave y `7 = debug` lo más trivial. Filtrar «por severidad 3 o inferior» significa quedarse con **errores y todo lo peor**. Es un contrasentido intuitivo que se pregunta con frecuencia [RFC5424].
+> **[DATO CLAVE]** En syslog, **cuanto menor es el número, más grave es el mensaje**: `0 = emerg` es lo más grave y `7 = debug` lo más trivial. Filtrar «por severidad 3 o inferior» significa quedarse con **errores y todo lo peor**. Es un contrasentido intuitivo [RFC5424].
 
 Los archivos viven en `/var/log` conforme al estándar FHS [FHS]: `/var/log/syslog` o `/var/log/messages` (general), `/var/log/auth.log` o `/var/log/secure` (autenticación), `/var/log/kern.log` (núcleo). En sistemas con systemd, el **diario** (`journald`) los almacena en formato binario indexado y se consulta con `journalctl`:
 
@@ -823,9 +823,9 @@ Get-WinEvent -LogName Security -MaxEvents 50 | Where-Object {$_.Id -eq 4625}   #
 5. **Rotar** y comprimir para que no agoten el disco.
 6. **Correlacionar y alertar**: un sistema de gestión de eventos de seguridad (**SIEM**) convierte millones de líneas en unas pocas alertas accionables.
 
-> **[DATO CLAVE EXAMEN]** El ENS dedica a esto tres medidas encadenadas: **`op.exp.8` (Registro de la actividad)** —vinculada a la dimensión **trazabilidad**—, **`op.exp.9` (Registro de la gestión de incidentes)** y **`op.exp.10`**, sin olvidar la exigencia del artículo 24 de registrar la actividad de los usuarios «permitiendo identificar en cada momento a la persona que actúa», con pleno respeto a la normativa de protección de datos [ENS].
+> **[DATO CLAVE]** El ENS dedica a esto tres medidas encadenadas: **`op.exp.8` (Registro de la actividad)** —vinculada a la dimensión **trazabilidad**—, **`op.exp.9` (Registro de la gestión de incidentes)** y **`op.exp.10`**, sin olvidar la exigencia del artículo 24 de registrar la actividad de los usuarios «permitiendo identificar en cada momento a la persona que actúa», con pleno respeto a la normativa de protección de datos [ENS].
 
-> **[EJEMPLO AYTO MADRID]** Un ciudadano afirma que presentó una solicitud el último día de plazo y que el sistema le dio error. La única forma de acreditar qué ocurrió —y de resolver correctamente la reclamación— es el **registro**: los eventos del servidor de la sede en esa franja horaria, el estado del servicio de registro electrónico y las anotaciones de la aplicación. Si esos registros no existen, no están sincronizados o se han sobrescrito, el Ayuntamiento se queda sin prueba. Ahí se ve por qué la trazabilidad es una dimensión de seguridad y no un lujo técnico.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Un ciudadano afirma que presentó una solicitud el último día de plazo y que el sistema le dio error. La única forma de acreditar qué ocurrió —y de resolver correctamente la reclamación— es el **registro**: los eventos del servidor de la sede en esa franja horaria, el estado del servicio de registro electrónico y las anotaciones de la aplicación. Si esos registros no existen, no están sincronizados o se han sobrescrito, el Ayuntamiento se queda sin prueba. Ahí se ve por qué la trazabilidad es una dimensión de seguridad y no un lujo técnico.
 
 ### 7.2. Identificación y aislamiento de anomalías del sistema
 
@@ -839,7 +839,7 @@ Get-WinEvent -LogName Security -MaxEvents 50 | Where-Object {$_.Id -eq 4625}   #
 6. **Restablecer** el servicio, aunque sea con una solución temporal documentada.
 7. **Analizar la causa raíz** después, con el servicio ya en pie, y cerrar el ciclo con acciones que impidan la repetición.
 
-> **[DATO CLAVE EXAMEN]** En gestión de incidencias, **restablecer el servicio y averiguar la causa son dos objetivos distintos y sucesivos**, no simultáneos. Primero se devuelve el servicio a la ciudadanía (aunque sea con una solución temporal); después se investiga el **problema** con calma. Confundirlos es el error típico del supuesto práctico: quedarse depurando la causa con el servicio caído [ITIL] [ISO20000].
+> **[DATO CLAVE]** En gestión de incidencias, **restablecer el servicio y averiguar la causa son dos objetivos distintos y sucesivos**, no simultáneos. Primero se devuelve el servicio a la ciudadanía (aunque sea con una solución temporal); después se investiga el **problema** con calma. Confundirlos es el error típico del supuesto práctico: quedarse depurando la causa con el servicio caído [ITIL] [ISO20000].
 
 **Aislamiento por capas.** Recorrer la pila de abajo arriba —o de arriba abajo, pero de forma sistemática— evita dar palos de ciego:
 
@@ -865,9 +865,9 @@ Get-WinEvent -LogName Security -MaxEvents 50 | Where-Object {$_.Id -eq 4625}   #
 - **Agotamiento de descriptores de archivo o de puertos efímeros**: errores de «demasiados archivos abiertos» bajo carga alta.
 - **Código dañino / secuestro de datos**: uso anómalo de CPU y de disco, archivos renombrados masivamente, copias de seguridad atacadas. Exige **contención inmediata**: aislar de la red sin apagar precipitadamente, para no perder evidencias volátiles, y activar el procedimiento de gestión de incidentes.
 
-> **[DATO CLAVE EXAMEN]** Ante la sospecha de un incidente de seguridad, la secuencia del ENS y del NIST es **preparación → detección y análisis → contención, erradicación y recuperación → lecciones aprendidas** [NIST80061]. Y hay una obligación específica del sector público: la **notificación** del incidente conforme al procedimiento establecido (CCN-CERT para el ENS) y, si hay datos personales comprometidos, la **notificación de la brecha** conforme al RGPD [ENS] [RGPD].
+> **[DATO CLAVE]** Ante la sospecha de un incidente de seguridad, la secuencia del ENS y del NIST es **preparación → detección y análisis → contención, erradicación y recuperación → lecciones aprendidas** [NIST80061]. Y hay una obligación específica del sector público: la **notificación** del incidente conforme al procedimiento establecido (CCN-CERT para el ENS) y, si hay datos personales comprometidos, la **notificación de la brecha** conforme al RGPD [ENS] [RGPD].
 
-> **[REFERENCIA CRUZADA]** La **gestión de la resolución de incidencias** con el usuario final y el **control remoto del puesto** se desarrollan en el **Tema 29**; las **amenazas, vulnerabilidades y técnicas de seguridad** en su conjunto, en el **Tema 32**; y la **seguridad perimetral y del puesto**, en el **Tema 36**. Aquí se trata el diagnóstico técnico del sistema operativo.
+> **[RELACIÓN CON OTROS TEMAS]** La **gestión de la resolución de incidencias** con el usuario final y el **control remoto del puesto** se desarrollan en el **Tema 29**; las **amenazas, vulnerabilidades y técnicas de seguridad** en su conjunto, en el **Tema 32**; y la **seguridad perimetral y del puesto**, en el **Tema 36**. Aquí se trata el diagnóstico técnico del sistema operativo.
 
 ---
 
@@ -907,13 +907,13 @@ DISM /Online /Cleanup-Image /RestoreHealth  :: reparar la imagen de componentes 
 chkdsk C: /f /r                             :: comprobar y reparar el sistema de archivos
 ```
 
-> **[DATO CLAVE EXAMEN]** El orden correcto en Windows es **`DISM` antes que `sfc`** cuando el almacén de componentes está dañado: `sfc` repara los archivos del sistema tomándolos de ese almacén, de modo que si el almacén está corrupto, `sfc` no puede reparar nada. `DISM /RestoreHealth` repara el almacén; después `sfc /scannow` repara el sistema [MS-WINRE].
+> **[DATO CLAVE]** El orden correcto en Windows es **`DISM` antes que `sfc`** cuando el almacén de componentes está dañado: `sfc` repara los archivos del sistema tomándolos de ese almacén, de modo que si el almacén está corrupto, `sfc` no puede reparar nada. `DISM /RestoreHealth` repara el almacén; después `sfc /scannow` repara el sistema [MS-WINRE].
 
-> **[DATO CLAVE EXAMEN]** `fsck` **nunca** se ejecuta sobre un sistema de archivos montado en lectura y escritura: puede destruir datos. Se ejecuta desde un medio de rescate, en modo de emergencia o programándolo para el siguiente arranque. Es el error de manual del administrador con prisa [MAN-PAGES].
+> **[DATO CLAVE]** `fsck` **nunca** se ejecuta sobre un sistema de archivos montado en lectura y escritura: puede destruir datos. Se ejecuta desde un medio de rescate, en modo de emergencia o programándolo para el siguiente arranque. Es el error de manual del administrador con prisa [MAN-PAGES].
 
 **Criterio de decisión: reparar o reinstalar.** Ante un sistema muy dañado, insistir en la reparación puede costar más que rehacerlo. Los criterios que inclinan la balanza hacia **reinstalar o restaurar la imagen** son: el sistema es un puesto de usuario estandarizado y existe una imagen corporativa; el tiempo de reparación supera al de despliegue; hay sospecha de **compromiso de seguridad** (un sistema comprometido **no se repara: se reinstala**, porque no se puede acreditar que no queden puertas traseras); o la causa raíz es desconocida y podría reproducirse.
 
-> **[EJEMPLO AYTO MADRID]** Un puesto de un Distrito no arranca tras un corte de luz. Como existe una **imagen corporativa** y los datos del usuario están en el servidor de ficheros y no en el equipo, la decisión correcta no es dedicar tres horas a reparar el arranque, sino **redesplegar la imagen** en veinte minutos y devolver el puesto al servicio. Esa decisión solo es posible porque previamente se ha hecho el trabajo de fondo: imagen estandarizada, datos centralizados e inventario actualizado.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Un puesto de un Distrito no arranca tras un corte de luz. Como existe una **imagen corporativa** y los datos del usuario están en el servidor de ficheros y no en el equipo, la decisión correcta no es dedicar tres horas a reparar el arranque, sino **redesplegar la imagen** en veinte minutos y devolver el puesto al servicio. Esa decisión solo es posible porque previamente se ha hecho el trabajo de fondo: imagen estandarizada, datos centralizados e inventario actualizado.
 
 ### 8.2. Copias de seguridad, restauración y continuidad operativa
 
@@ -922,7 +922,7 @@ chkdsk C: /f /r                             :: comprobar y reparar el sistema de
 - **RPO** (*Recovery Point Objective*): **cuántos datos** se puede permitir perder, expresado en tiempo. Determina la **frecuencia** de las copias: un RPO de 24 horas admite copia diaria; un RPO de 15 minutos exige replicación o copia de los registros de transacción.
 - **RTO** (*Recovery Time Objective*): **cuánto tiempo** puede estar caído el servicio. Determina la **tecnología** de recuperación: cinta en armario, disco en línea, sistema en espera caliente o alta disponibilidad.
 
-> **[DATO CLAVE EXAMEN]** **RPO mira hacia atrás** (hasta qué punto del pasado retrocedo: pérdida de datos) y **RTO mira hacia delante** (cuánto tardo en volver: pérdida de servicio). Bajar el RPO cuesta **almacenamiento y frecuencia**; bajar el RTO cuesta **infraestructura**. Ambos los decide el responsable del servicio, y el técnico diseña la solución que los cumple [NIST80034].
+> **[DATO CLAVE]** **RPO mira hacia atrás** (hasta qué punto del pasado retrocedo: pérdida de datos) y **RTO mira hacia delante** (cuánto tardo en volver: pérdida de servicio). Bajar el RPO cuesta **almacenamiento y frecuencia**; bajar el RTO cuesta **infraestructura**. Ambos los decide el responsable del servicio, y el técnico diseña la solución que los cumple [NIST80034].
 
 **Tipos de copia.**
 
@@ -933,7 +933,7 @@ chkdsk C: /f /r                             :: comprobar y reparar el sistema de
 | **Incremental** | Lo cambiado desde la **última copia de cualquier tipo** | La más corta | Total **+ todas** las incrementales de la cadena |
 | **Sintética** | Consolida en el destino una total a partir de las incrementales | Corta | Simple, sin releer el origen |
 
-> **[DATO CLAVE EXAMEN]** La diferencia se resume así: la **diferencial** ocupa más y tarda más en hacerse, pero **restaura en dos pasos**; la **incremental** ocupa menos y es más rápida de hacer, pero **restaura en tantos pasos como copias tenga la cadena**, y si se pierde o corrompe una sola de ellas, la cadena se rompe. Es una pregunta clásica de examen.
+> **[DATO CLAVE]** La diferencia se resume así: la **diferencial** ocupa más y tarda más en hacerse, pero **restaura en dos pasos**; la **incremental** ocupa menos y es más rápida de hacer, pero **restaura en tantos pasos como copias tenga la cadena**, y si se pierde o corrompe una sola de ellas, la cadena se rompe.
 
 **Estrategias de rotación.** El esquema **abuelo-padre-hijo** (*GFS*) combina copias diarias (hijo), semanales (padre) y mensuales o anuales (abuelo), con retenciones distintas para cada nivel, y es el que permite conciliar espacio con obligaciones de conservación.
 
@@ -945,9 +945,9 @@ chkdsk C: /f /r                             :: comprobar y reparar el sistema de
 
 A lo que hoy se añade, por la amenaza del secuestro de datos: al menos una copia **inmutable** o **desconectada** (*air gap*), y **verificación** periódica. El ENS lo formula con el refuerzo **R2 de `mp.info.6`**: al menos una de las copias se almacenará **de forma separada, en lugar diferente**, de modo que un mismo incidente no pueda afectar a la vez al repositorio original y a la copia [ENS].
 
-> **[DATO CLAVE EXAMEN]** El ENS exige, en la medida **`mp.info.6` (Copias de seguridad)** —dimensión **disponibilidad**—, que los procedimientos de respaldo indiquen **cuatro extremos**: **frecuencia** de las copias, requisitos de almacenamiento **en el propio lugar**, requisitos de almacenamiento **en otros lugares** y **controles de acceso autorizado** a las copias. Y su refuerzo **R1** obliga a **probar regularmente** los procedimientos de copia **y de restauración**, con una frecuencia que dependerá de la criticidad de los datos [ENS].
+> **[DATO CLAVE]** El ENS exige, en la medida **`mp.info.6` (Copias de seguridad)** —dimensión **disponibilidad**—, que los procedimientos de respaldo indiquen **cuatro extremos**: **frecuencia** de las copias, requisitos de almacenamiento **en el propio lugar**, requisitos de almacenamiento **en otros lugares** y **controles de acceso autorizado** a las copias. Y su refuerzo **R1** obliga a **probar regularmente** los procedimientos de copia **y de restauración**, con una frecuencia que dependerá de la criticidad de los datos [ENS].
 
-> **[DATO CLAVE EXAMEN]** **Una copia de seguridad que nunca se ha restaurado no es una copia de seguridad: es una suposición.** Los modos de fallo silencioso son numerosos —el trabajo termina «con avisos», se copia una carpeta vacía, la base de datos se copia en caliente sin coherencia, el soporte está ilegible, nadie recuerda la clave de cifrado de la copia—. La única prueba válida es una **restauración de prueba** documentada.
+> **[DATO CLAVE]** **Una copia de seguridad que nunca se ha restaurado no es una copia de seguridad: es una suposición.** Los modos de fallo silencioso son numerosos —el trabajo termina «con avisos», se copia una carpeta vacía, la base de datos se copia en caliente sin coherencia, el soporte está ilegible, nadie recuerda la clave de cifrado de la copia—. La única prueba válida es una **restauración de prueba** documentada.
 
 **Restauración: tipos y consideraciones.**
 
@@ -970,11 +970,11 @@ Consideraciones críticas: **verificar la integridad** de la copia antes de conf
 
 Los centros alternativos se clasifican por su grado de preparación: **frío** (espacio y suministros, sin equipos configurados: recuperación en días), **templado** (equipos y comunicaciones preparados, datos por restaurar: horas) y **caliente** (réplica en funcionamiento, con datos sincronizados: minutos). Cuanto menor el RTO, mayor el coste.
 
-> **[DATO CLAVE EXAMEN]** El ENS estructura la continuidad en cuatro medidas encadenadas de la familia **`op.cont`** —todas de la dimensión **disponibilidad**—: **`op.cont.1` Análisis de impacto**, **`op.cont.2` Plan de continuidad**, **`op.cont.3` Pruebas periódicas** y **`op.cont.4` Medios alternativos**. La primera se exige a partir de categoría MEDIA; las tres siguientes, en categoría **ALTA** [ENS].
+> **[DATO CLAVE]** El ENS estructura la continuidad en cuatro medidas encadenadas de la familia **`op.cont`** —todas de la dimensión **disponibilidad**—: **`op.cont.1` Análisis de impacto**, **`op.cont.2` Plan de continuidad**, **`op.cont.3` Pruebas periódicas** y **`op.cont.4` Medios alternativos**. La primera se exige a partir de categoría MEDIA; las tres siguientes, en categoría **ALTA** [ENS].
 
-> **[EJEMPLO AYTO MADRID]** Para el servicio de Padrón se fija un **RPO de una hora** (copia de los registros de transacción cada hora) y un **RTO de cuatro horas** en día hábil. La estrategia resultante: copia total semanal, incrementales diarias, copia de registros de transacción horaria, una copia inmutable fuera del centro principal y **una prueba de restauración completa al semestre**, cuyo resultado —incluido el tiempo real empleado— se documenta y se compara con el RTO comprometido. Si la prueba tarda seis horas, el compromiso no se cumple y hay que cambiar la tecnología, no el papel.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Para el servicio de Padrón se fija un **RPO de una hora** (copia de los registros de transacción cada hora) y un **RTO de cuatro horas** en día hábil. La estrategia resultante: copia total semanal, incrementales diarias, copia de registros de transacción horaria, una copia inmutable fuera del centro principal y **una prueba de restauración completa al semestre**, cuyo resultado —incluido el tiempo real empleado— se documenta y se compara con el RTO comprometido. Si la prueba tarda seis horas, el compromiso no se cumple y hay que cambiar la tecnología, no el papel.
 
-> **[REFERENCIA CRUZADA]** Los **sistemas de almacenamiento y su virtualización**, y las **políticas, sistemas y procedimientos de copia de seguridad** de sistemas físicos y virtuales en toda su extensión, son objeto del **Tema 26**; la **virtualización** que hace posibles las instantáneas y la recuperación rápida, del **Tema 28**; y los **servicios en la nube** como medio alternativo, del **Tema 31**. Este epígrafe cubre lo que corresponde al administrador del **sistema operativo**: qué se copia, con qué frecuencia, cómo se restaura y cómo se prueba.
+> **[RELACIÓN CON OTROS TEMAS]** Los **sistemas de almacenamiento y su virtualización**, y las **políticas, sistemas y procedimientos de copia de seguridad** de sistemas físicos y virtuales en toda su extensión, son objeto del **Tema 26**; la **virtualización** que hace posibles las instantáneas y la recuperación rápida, del **Tema 28**; y los **servicios en la nube** como medio alternativo, del **Tema 31**. Este epígrafe cubre lo que corresponde al administrador del **sistema operativo**: qué se copia, con qué frecuencia, cómo se restaura y cómo se prueba.
 
 ---
 
@@ -987,5 +987,5 @@ Los cuatro bloques del tema forman una **única cadena de responsabilidad profes
 3. **Mantener** el sistema vivo, medido y al día, con parcheo controlado, probado y reversible (§5-§6).
 4. **Diagnosticar** con método y **recuperar** con garantías cuando, pese a todo, algo falla (§7-§8).
 
-> **[DATO CLAVE EXAMEN]** Si hubiera que reducir el tema a cinco ideas para el examen: (1) el **inventario** es la base de todo (`op.exp.1`); (2) **nada se cambia en producción sin saber deshacerlo** (`op.exp.4` R2); (3) **la trazabilidad exige registros centralizados y con hora sincronizada**; (4) **RPO y RTO los fija el servicio, no el técnico**; y (5) **una copia sin prueba de restauración no existe** (`mp.info.6` R1).
+> **[DATO CLAVE]** Si hubiera que reducir el tema a cinco ideas para el examen: (1) el **inventario** es la base de todo (`op.exp.1`); (2) **nada se cambia en producción sin saber deshacerlo** (`op.exp.4` R2); (3) **la trazabilidad exige registros centralizados y con hora sincronizada**; (4) **RPO y RTO los fija el servicio, no el técnico**; y (5) **una copia sin prueba de restauración no existe** (`mp.info.6` R1).
 

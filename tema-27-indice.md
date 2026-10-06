@@ -9,9 +9,9 @@
 
 ## Estructura del tema
 
-El esqueleto oficial agrupa el tema en **cuatro bloques**. Cada bloque se desarrolla en **dos secciones numeradas**, de modo que el contenido tiene **8 secciones y 31 epígrafes**:
+El tema se agrupa en **cuatro bloques**. Cada bloque se desarrolla en **dos secciones numeradas**, de modo que el contenido tiene **8 secciones y 31 epígrafes**:
 
-| Bloque del esqueleto oficial | Secciones del contenido |
+| Bloque | Secciones del contenido |
 |---|---|
 | I — Administración del sistema operativo y software de base | §1 y §2 |
 | II — Funciones y responsabilidades de la administración de sistemas | §3 y §4 |

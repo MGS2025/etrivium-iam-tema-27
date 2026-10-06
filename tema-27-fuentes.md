@@ -30,7 +30,8 @@
 | `[ISO20000]` | ISO/IEC 20000-1. *Gestión del servicio de TI*. Requisitos de gestión de incidencias, problemas, cambios, configuración, capacidad y continuidad del servicio. |
 | `[ISO27002]` | ISO/IEC 27002. *Controles de seguridad de la información*. Controles de gestión de vulnerabilidades técnicas, control de acceso, registro y supervisión, copias de seguridad y gestión de cambios. |
 | `[ISO22301]` | ISO/IEC 22301. *Sistemas de gestión de la continuidad del negocio*. Análisis de impacto en el negocio (BIA), del que se derivan **RPO** y **RTO**. |
-| `[ISO25010]` | ISO/IEC 25010 (SQuaRE). *Modelo de calidad del producto software*. Fiabilidad, mantenibilidad, eficiencia de desempeño y seguridad: marco de los criterios de §5. |
+| `[ISO25010]` | ISO/IEC 25010:2023 (SQuaRE). *Modelo de calidad del producto software*. Anula y sustituye a la edición de 2011: es la edición vigente. Fiabilidad, mantenibilidad, eficiencia de desempeño y seguridad: marco de los criterios de §5. |
+| `[ISO25010-2011]` | ISO/IEC 25010:2011 (SQuaRE). *Modelo de calidad del producto software*. Edición histórica, **anulada y sustituida por la ISO/IEC 25010:2023**. Se conserva la referencia porque es la que recogen los temarios al uso. |
 | `[ENS]` | Real Decreto 311/2022, de 3 de mayo, por el que se regula el **Esquema Nacional de Seguridad**. Principios básicos, requisitos mínimos, categorización de sistemas (BÁSICA/MEDIA/ALTA), dimensiones de seguridad y anexo II de medidas (marco organizativo, marco operacional y medidas de protección). |
 | `[ENI]` | Real Decreto 4/2010, por el que se regula el **Esquema Nacional de Interoperabilidad**, y sus Normas Técnicas de Interoperabilidad. |
 | `[L4015]` | Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público. Arts. 156-157 (ENI, ENS y reutilización de sistemas y aplicaciones) y funcionamiento electrónico del sector público. |

@@ -387,7 +387,7 @@
 ## D7 · Identidad y permisos: Linux frente a Windows
 
 **Sección**: §3.1 — Administración de usuarios, grupos y directivas de seguridad
-**Propósito**: Poner en paralelo los dos modelos de identidad y permisos, con las reglas que más se preguntan de cada uno.
+**Propósito**: Poner en paralelo los dos modelos de identidad y permisos, con las reglas clave de cada uno.
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" role="img" aria-label="Comparación del modelo de identidad y permisos de Linux, basado en UID, GID y permisos rwx con sudo y PAM, frente al de Windows, basado en SID, listas de control de acceso, Active Directory y directivas de grupo. Debajo, los cinco principios comunes de gestión de cuentas exigidos por el Esquema Nacional de Seguridad">
@@ -489,7 +489,7 @@
 ## D9 · Servicios, demonios y tareas programadas
 
 **Sección**: §3.2 — Gestión de servicios, demonios y tareas programadas
-**Propósito**: Equiparar los mecanismos de las dos familias de sistemas y fijar la sintaxis de `cron`, que es material directo de examen.
+**Propósito**: Equiparar los mecanismos de las dos familias de sistemas y fijar la sintaxis de `cron`.
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" role="img" aria-label="Gestión de servicios y demonios en systemd frente a servicios de Windows, con la distinción entre arrancar ahora y habilitar en el arranque. Debajo, la sintaxis de los cinco campos de cron y las buenas prácticas de las tareas programadas">
