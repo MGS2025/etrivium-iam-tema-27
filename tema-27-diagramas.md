@@ -38,7 +38,7 @@
 **Propósito**: Situar cada componente del software de base en su capa y fijar la frontera entre modo núcleo y modo usuario.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" role="img" aria-label="Capas del software de base, de abajo arriba: hardware, firmware UEFI, núcleo del sistema operativo con controladores, bibliotecas y servicios del sistema, middleware y aplicaciones. La frontera entre modo núcleo y modo usuario se cruza mediante llamadas al sistema">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 336" role="img" aria-label="Capas del software de base, de abajo arriba: hardware, firmware UEFI, núcleo del sistema operativo con controladores, bibliotecas y servicios del sistema, middleware y aplicaciones. La frontera entre modo núcleo y modo usuario se cruza mediante llamadas al sistema">
   <style>.t1{font:700 11.5px system-ui,sans-serif;fill:#fff}.s1{font:9.5px system-ui,sans-serif;fill:#fff}.h1{font:700 13px system-ui,sans-serif;fill:#0055a0}.k1{font:700 10px system-ui,sans-serif;fill:#0055a0}.d1{font:9.5px system-ui,sans-serif;fill:#444}</style>
   <text x="340" y="20" text-anchor="middle" class="h1">Las capas del software de base</text>
   <rect x="60" y="32" width="470" height="40" rx="5" fill="#2d8659"/>
@@ -68,7 +68,7 @@
   <text x="602" y="86" text-anchor="middle" class="k1">MODO</text>
   <text x="602" y="102" text-anchor="middle" class="k1">USUARIO</text>
   <text x="602" y="122" text-anchor="middle" class="d1">restringido</text>
-  <text x="670" y="326" text-anchor="end" style="font:9.5px system-ui;fill:#666">[Fuente: SILBERSCHATZ; STALLINGS]</text>
+  <text x="670" y="332" text-anchor="end" style="font:9.5px system-ui;fill:#666">[Fuente: SILBERSCHATZ; STALLINGS]</text>
 </svg>
 ```
 
@@ -370,10 +370,10 @@
   <text x="557" y="136" text-anchor="middle" class="d6">falla, sin excepción</text>
   <rect x="450" y="162" width="214" height="90" rx="5" fill="#f0f4f8" stroke="#2d8659"/>
   <text x="557" y="181" text-anchor="middle" class="k6">VENTAJAS DE LVM</text>
-  <text x="557" y="201" text-anchor="middle" class="d6">Redimensionar EN CALIENTE</text>
-  <text x="557" y="217" text-anchor="middle" class="d6">Instantáneas (snapshots)</text>
-  <text x="557" y="233" text-anchor="middle" class="d6">Agregar varios discos en uno</text>
-  <text x="557" y="247" text-anchor="middle" class="d6">Windows: Espacios de almacenamiento</text>
+  <text x="557" y="197" text-anchor="middle" class="d6">Redimensionar EN CALIENTE</text>
+  <text x="557" y="211" text-anchor="middle" class="d6">Instantáneas (snapshots)</text>
+  <text x="557" y="225" text-anchor="middle" class="d6">Agregar varios discos en uno</text>
+  <text x="557" y="239" text-anchor="middle" class="d6">Windows: Espacios de almacenamiento</text>
   <rect x="450" y="262" width="214" height="68" rx="5" fill="#d13c3c"/>
   <text x="557" y="281" text-anchor="middle" class="t6">AMPLIAR SON DOS PASOS</text>
   <text x="557" y="300" text-anchor="middle" class="s6">1) lvextend  → agranda el volumen</text>
@@ -439,7 +439,7 @@
 **Propósito**: Separar las tres funciones que se confunden (autenticar, autorizar y auditar) y enumerar los cuatro modelos de control de acceso.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 310" role="img" aria-label="Las tres funciones AAA: autenticación que responde a quién eres, autorización a qué puedes hacer y auditoría a qué hiciste. Debajo, los tres factores de autenticación y los cuatro modelos de control de acceso: discrecional, obligatorio, basado en roles y basado en atributos">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 316" role="img" aria-label="Las tres funciones AAA: autenticación que responde a quién eres, autorización a qué puedes hacer y auditoría a qué hiciste. Debajo, los tres factores de autenticación y los cuatro modelos de control de acceso: discrecional, obligatorio, basado en roles y basado en atributos">
   <style>.t8{font:700 11px system-ui,sans-serif;fill:#fff}.s8{font:9px system-ui,sans-serif;fill:#fff}.h8{font:700 13px system-ui,sans-serif;fill:#0055a0}.k8{font:700 10px system-ui,sans-serif;fill:#0055a0}.d8{font:9px system-ui,sans-serif;fill:#444}</style>
   <text x="340" y="20" text-anchor="middle" class="h8">Autenticación, autorización y auditoría: tres cosas distintas</text>
   <rect x="16" y="34" width="196" height="64" rx="5" fill="#0055a0"/>
@@ -480,7 +480,7 @@
   <text x="586" y="253" text-anchor="middle" class="s8">contexto (hora, lugar)</text>
   <rect x="90" y="272" width="500" height="24" rx="5" fill="none" stroke="#d13c3c" stroke-width="2"/>
   <text x="340" y="289" text-anchor="middle" class="k8">Las contraseñas no se guardan: se guarda su resumen con SAL</text>
-  <text x="670" y="304" text-anchor="end" style="font:9.5px system-ui;fill:#666">[Fuente: SILBERSCHATZ; ISO27002; ENS]</text>
+  <text x="670" y="311" text-anchor="end" style="font:9.5px system-ui;fill:#666">[Fuente: SILBERSCHATZ; ISO27002; ENS]</text>
 </svg>
 ```
 
@@ -550,14 +550,14 @@
   <text x="604" y="70" text-anchor="middle" class="t10">Trazabilidad</text>
   <rect x="16" y="92" width="316" height="70" rx="5" fill="#f0f4f8" stroke="#0055a0"/>
   <text x="174" y="110" text-anchor="middle" class="k10">CATEGORÍA del sistema: manda la más alta</text>
-  <text x="174" y="130" text-anchor="middle" class="d10">ALTA: alguna dimensión en nivel ALTO</text>
-  <text x="174" y="145" text-anchor="middle" class="d10">MEDIA: alguna en MEDIO y ninguna superior</text>
-  <text x="174" y="158" text-anchor="middle" class="d10">BÁSICA: alguna en BAJO y ninguna superior</text>
+  <text x="174" y="127" text-anchor="middle" class="d10">ALTA: alguna dimensión en nivel ALTO</text>
+  <text x="174" y="141" text-anchor="middle" class="d10">MEDIA: alguna en MEDIO y ninguna superior</text>
+  <text x="174" y="155" text-anchor="middle" class="d10">BÁSICA: alguna en BAJO y ninguna superior</text>
   <rect x="348" y="92" width="316" height="70" rx="5" fill="#f0f4f8" stroke="#0055a0"/>
   <text x="506" y="110" text-anchor="middle" class="k10">Cuatro RESPONSABLES diferenciados (art. 11)</text>
-  <text x="506" y="130" text-anchor="middle" class="d10">de la Información · del Servicio · de la Seguridad</text>
-  <text x="506" y="145" text-anchor="middle" class="d10">y del Sistema (el administrador)</text>
-  <text x="506" y="158" text-anchor="middle" class="d10">Seguridad y explotación NO en la misma persona</text>
+  <text x="506" y="127" text-anchor="middle" class="d10">de la Información · del Servicio · de la Seguridad</text>
+  <text x="506" y="141" text-anchor="middle" class="d10">y del Sistema (el administrador)</text>
+  <text x="506" y="155" text-anchor="middle" class="d10">Seguridad y explotación NO en la misma persona</text>
   <text x="340" y="182" text-anchor="middle" class="k10">Las medidas del anexo II que caen sobre este tema</text>
   <rect x="16" y="192" width="210" height="30" rx="5" fill="#004077"/>
   <text x="121" y="212" text-anchor="middle" class="t10">MARCO ORGANIZATIVO [org]</text>
